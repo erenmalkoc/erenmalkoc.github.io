@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <a href="#">apps with erenium</a>
+            </div>
+            <div class="nav-links">
+                <a href="#apps" class="nav-link" data-tr="apps">Uygulamalar</a>
+                <a href="#contact" class="nav-link" data-tr="contact">İletişim</a>
+                <button onclick="toggleLanguage()" class="lang-toggle">
+                    <span class="current-lang">TR</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="apps" class="apps-section">
+            <div class="section-container">
+                <h2 class="section-title" data-tr="featured-apps">Öne Çıkan Uygulamalar</h2>
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="/images/gokid.png" alt="GoKid Logo" class="app-logo">
+                        </div>
+                        <div class="app-content">
+                            <h3>GoKid</h3>
+                            <p data-tr="gokid-desc">An innovative communication solution for individuals with special needs and their families.</p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=dev.erenmalkoc.pecs" target="_blank" class="store-button">
+                                    <i class="fab fa-google-play"></i>
+                                    <span>Play Store</span>
+                                </a>
+                                <a href="https://apps.apple.com/tr/app/gokid/id6654923599?l=tr" target="_blank" class="store-button">
+                                    <i class="fab fa-app-store-ios"></i>
+                                    <span>App Store</span>
+                                </a>
+                                <a href="https://gokid.stemegitimciler.org" target="_blank" class="store-button">
+                                    <i class="fas fa-globe"></i>
+                                    <span>Website</span>
+                                </a>
+                                <a href="https://github.com/erenmalkoc/gokid" target="_blank" class="store-button">
+                                    <i class="fab fa-github"></i>
+                                    <span>Open Source</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="/images/snaplock.png" alt="Snaplock Logo" class="app-logo">
+                        </div>
+                        <div class="app-content">
+                            <h3>Snaplock</h3>
+                            <p data-tr="snaplock-desc">Secure and lightweight password management solution.</p>
+                            <div class="app-links">
+                                <div class="coming-soon" data-tr="coming-soon">Coming Soon</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="/images/stemegt.png" alt="STEM EGT Logo" class="app-logo">
+                        </div>
+                        <div class="app-content">
+                            <h3>STEM EGT</h3>
+                            <p data-tr="stem-desc">Educational mobile platform developed under US Embassy's STREAM IT UP project.</p>
+                            <div class="app-links">
+                                <a href="https://play.google.com/store/apps/details?id=org.stemegitimciler.stream&hl=tr" target="_blank" class="store-button">
+                                    <i class="fab fa-google-play"></i>
+                                    <span>Play Store</span>
+                                </a>
+                                <a href="https://apps.apple.com/us/app/stem-egt/id6462422867" target="_blank" class="store-button">
+                                    <i class="fab fa-app-store-ios"></i>
+                                    <span>App Store</span>
+                                </a>
+
+
+                                <a href="https://stream.stemegitimciler.org/" target="_blank" class="store-button">
+                                    <span class="siu-about" data-tr="siu-about">About Project</span>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="app-content">
+                            <h3>TicTacTalk</h3>
+                            <p data-tr="tictactalk-desc">Location-based social discovery platform.</p>
+                            <div class="app-links">
+                                <div class="coming-soon" data-tr="coming-soon">Coming Soon</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="section-container">
+                <h2 class="section-title" data-tr="contact-title">İletişime Geç</h2>
+                <div class="contact-buttons">
+                    <a href="mailto:malkoceren24@gmail.com" class="contact-button">
+                        <i class="fas fa-envelope"></i>
+                        <span data-tr="send-email">E-posta Gönder</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/erenmalkoc" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/eren-malkoc" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://x.com/erenmalkoc01" class="social-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-square-x-twitter"></i>
+                </a>
+            </div>
+            <p class="copyright">&copy; 2025 <span data-tr="rights">erenmalkoc</span></p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            tr: {
+                'apps': 'Uygulamalar',
+                'contact': 'İletişim',
+                'featured-apps': 'Öne Çıkan Uygulamalar',
+                'gokid-desc': 'Özel gereksinimli bireyler için yenilikçi iletişim çözümü.',
+                'snaplock-desc': 'Güvenli ve hafif şifre yönetim çözümü.',
+                'stem-desc': 'ABD Büyükelçiliği tarafından desteklenen STREAM IT UP projesi kapsamında geliştirilen mobil uygulama.',
+                'tictactalk-desc': 'Konum tabanlı sosyal keşif platformu.',
+                'contact-title': 'İletişime Geç',
+                'send-email': 'E-posta Gönder',
+                'coming-soon': 'Çok Yakında',
+                'rights': 'Eren Malkoç',
+                'siu-about' : 'Proje Hakkında'
+            },
+            en: {
+                'apps': 'Apps',
+                'contact': 'Contact',
+                'featured-apps': 'Featured Apps',
+                'gokid-desc': 'An innovative communication solution for individuals with special needs and their families.',
+                'snaplock-desc': 'Secure and lightweight password management solution.',
+                'stem-desc': 'Mobile application developed within the scope of the STREAM IT UP project supported by the US Embassy.',
+                'tictactalk-desc': 'Location-based social discovery platform.',
+                'contact-title': 'Get in Touch',
+                'send-email': 'Send Email',
+                'coming-soon': 'Coming Soon',
+                'rights': 'Eren Malkoç',
+                'siu-about' : 'About Project'
+
+            }
+        };
+
+        function getBrowserLanguage() {
+            const browserLang = navigator.language.toLowerCase().split('-')[0];
+            return translations[browserLang] ? browserLang : 'en';
+        }
+
+        let currentLang = getBrowserLanguage();
+        document.querySelector('.current-lang').textContent = currentLang.toUpperCase();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+        });
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            updateLanguage();
+            document.querySelector('.current-lang').textContent = currentLang.toUpperCase();
+        }
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-tr]').forEach(element => {
+                const key = element.getAttribute('data-tr');
+                if (translations[currentLang][key]) {
+                    element.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+    </script>
+</body>
+</html>
