@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snaplock - Güvenli Şifre Yöneticisi</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="gradient-bg">
+      <div class="gradient-overlay"></div>
+    </div>
+
+    <nav>
+      <div class="nav-content">
+        <div class="logo">
+          <a href="../index.html"
+            ><span class="logo-prefix">apps by</span> erenium</a
+          >
+        </div>
+        <div class="nav-links">
+          <a href="../index.html#apps" class="nav-link" data-tr="apps"
+            >Uygulamalar</a
+          >
+          <a href="../index.html#contact" class="nav-link" data-tr="contact"
+            >İletişim</a
+          >
+          <button onclick="toggleLanguage()" class="lang-toggle">
+            <span class="current-lang">TR</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="simple-hero">
+        <div class="section-container">
+          <div class="hero-content">
+            <div class="app-hero-icon">
+              <img
+                src="../images/snaplock.png"
+                alt="Snaplock Logo"
+                class="hero-logo"
+              />
+            </div>
+            <h1 class="hero-title">Snaplock</h1>
+            <div class="download-buttons">
+              <div class="store-button-disabled">
+                <i class="fab fa-google-play"></i>
+                <span data-tr="coming-soon">Çok Yakında</span>
+              </div>
+              <div class="store-button-disabled">
+                <i class="fab fa-android"></i>
+                <span>F-Droid</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="social-links">
+          <a
+            href="https://github.com/erenmalkoc"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/eren-malkoc"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a
+            href="https://x.com/erenmalkoc01"
+            class="social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-square-x-twitter"></i>
+          </a>
+        </div>
+        <p class="copyright">
+          &copy; 2025 <span data-tr="rights">Eren Malkoç</span>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const translations = {
+        tr: {
+          apps: "Uygulamalar",
+          contact: "İletişim",
+          "coming-soon": "Çok Yakında",
+          rights: "Eren Malkoç",
+        },
+        en: {
+          apps: "Apps",
+          contact: "Contact",
+          "coming-soon": "Coming Soon",
+          rights: "Eren Malkoç",
+        },
+      };
+
+      function getBrowserLanguage() {
+        const browserLang = navigator.language.toLowerCase().split("-")[0];
+        return translations[browserLang] ? browserLang : "en";
+      }
+
+      let currentLang = getBrowserLanguage();
+      document.querySelector(".current-lang").textContent =
+        currentLang.toUpperCase();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateLanguage();
+      });
+
+      function toggleLanguage() {
+        currentLang = currentLang === "tr" ? "en" : "tr";
+        updateLanguage();
+        document.querySelector(".current-lang").textContent =
+          currentLang.toUpperCase();
+      }
+
+      function updateLanguage() {
+        document.querySelectorAll("[data-tr]").forEach((element) => {
+          const key = element.getAttribute("data-tr");
+          if (translations[currentLang][key]) {
+            element.innerHTML = translations[currentLang][key];
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
