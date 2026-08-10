@@ -633,4 +633,13 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* The greeting keeps rotating here — motion sensitivity is about movement,
+     so it crossfades in place rather than sliding and blurring. */
+  .swap.is-cycling .swap__word {
+    translate: none;
+    filter: none;
+    transition-property: opacity !important;
+    transition-duration: var(--md-duration-medium) !important;
+  }
 }

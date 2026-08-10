@@ -3,17 +3,16 @@
 (function () {
   "use strict";
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
   /* --- language swap -----------------------------------------------------
      Every .swap element holds the same list of translations in the same order,
      and they all advance together so the page never mixes two languages.
-     Without JS — or with reduced motion — all variants stay visible side by
-     side, so nobody has to wait for a rotation to read them. */
+     The rotation runs even under prefers-reduced-motion — the stylesheet drops
+     it to a plain crossfade there instead of sliding. Without JS all variants
+     stay visible side by side. */
 
   var swaps = document.querySelectorAll(".swap");
 
-  if (swaps.length && !reduceMotion.matches) {
+  if (swaps.length) {
     var groups = [];
     var count = 0;
 
