@@ -5,28 +5,39 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  /* --- greeting cycler ---------------------------------------------------
-     Without JS — or with reduced motion — all greetings stay visible side by
+  /* --- language swap -----------------------------------------------------
+     Every .swap element holds the same list of translations in the same order,
+     and they all advance together so the page never mixes two languages.
+     Without JS — or with reduced motion — all variants stay visible side by
      side, so nobody has to wait for a rotation to read them. */
 
-  var hello = document.getElementById("hello");
-  var chips = document.querySelectorAll("#langs .chip");
+  var swaps = document.querySelectorAll(".swap");
 
-  if (hello && !reduceMotion.matches) {
-    var words = hello.querySelectorAll(".hello__word");
+  if (swaps.length && !reduceMotion.matches) {
+    var groups = [];
+    var count = 0;
+
+    for (var s = 0; s < swaps.length; s++) {
+      var group = swaps[s].querySelectorAll(".swap__word");
+      if (!group.length) continue;
+      swaps[s].classList.add("is-cycling");
+      groups.push(group);
+      count = Math.max(count, group.length);
+    }
+
     var index = 0;
     var timer = null;
     var INTERVAL = 2600;
 
-    hello.classList.add("is-cycling");
-
     function show(next) {
-      index = (next + words.length) % words.length;
-      for (var i = 0; i < words.length; i++) {
-        words[i].classList.toggle("is-active", i === index);
-      }
-      for (var j = 0; j < chips.length; j++) {
-        chips[j].setAttribute("aria-pressed", j === index ? "true" : "false");
+      index = (next + count) % count;
+      for (var g = 0; g < groups.length; g++) {
+        var words = groups[g];
+        /* A shorter list just holds its last entry rather than going blank. */
+        var active = Math.min(index, words.length - 1);
+        for (var i = 0; i < words.length; i++) {
+          words[i].classList.toggle("is-active", i === active);
+        }
       }
     }
 
@@ -44,27 +55,14 @@
       }
     }
 
-    show(0);
-    start();
+    if (count > 0) {
+      show(0);
+      start();
 
-    for (var c = 0; c < chips.length; c++) {
-      (function (position, chip) {
-        chip.addEventListener("click", function () {
-          show(position);
-          start();
-        });
-      })(c, chips[c]);
-    }
-
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) stop();
-      else start();
-    });
-  } else if (chips.length) {
-    /* Static fallback: the chips describe the greetings rather than switch them. */
-    for (var k = 0; k < chips.length; k++) {
-      chips[k].setAttribute("aria-pressed", "true");
-      chips[k].disabled = true;
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stop();
+        else start();
+      });
     }
   }
 
