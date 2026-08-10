@@ -176,64 +176,6 @@ a {
   left: 0;
 }
 
-/* --- top app bar -------------------------------------------------------- */
-
-.app-bar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 64px;
-  padding-block: 0.5rem;
-  background: color-mix(in srgb, var(--md-surface) 85%, transparent);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--md-duration-short) var(--md-easing-standard);
-}
-
-.app-bar.is-scrolled {
-  border-bottom-color: var(--md-outline-variant);
-}
-
-.app-bar__inner {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: min(100% - 2.5rem, 68rem);
-  margin-inline: auto;
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin-right: auto;
-  color: var(--md-on-surface);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-}
-
-.brand__mark {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: var(--md-shape-m);
-  background: var(--md-primary-container);
-  color: var(--md-on-primary-container);
-  font-weight: 700;
-  font-size: 1.05rem;
-}
-
-.brand__dim {
-  color: var(--md-on-surface-variant);
-  font-weight: 400;
-}
-
 /* --- buttons ------------------------------------------------------------ */
 
 .btn {
@@ -346,7 +288,7 @@ a {
   display: grid;
   align-content: center;
   min-height: min(78vh, 44rem);
-  padding-block: 4rem 3rem;
+  padding-block: 5.5rem 3rem;
   overflow: hidden;
 }
 
@@ -354,16 +296,25 @@ a {
   position: absolute;
   z-index: -1;
   inset-inline-start: 50%;
-  top: 12%;
-  width: min(48rem, 120vw);
+  top: 4%;
+  width: min(64rem, 145vw);
   aspect-ratio: 1;
   translate: -50% 0;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--md-primary) 22%, transparent) 0%,
-    transparent 62%
-  );
+  /* closest-side keeps both layers fully faded before the circle's own edge,
+     otherwise the element boundary shows up as a hard arc. */
+  background:
+    radial-gradient(
+      circle closest-side at 50% 46%,
+      color-mix(in srgb, var(--md-primary) 46%, transparent) 0%,
+      color-mix(in srgb, var(--md-primary) 18%, transparent) 44%,
+      transparent 92%
+    ),
+    radial-gradient(
+      circle closest-side at 60% 30%,
+      color-mix(in srgb, var(--md-tertiary) 28%, transparent) 0%,
+      transparent 72%
+    );
   pointer-events: none;
 }
 
@@ -404,14 +355,6 @@ a {
   opacity: 1;
   translate: 0 0;
   filter: blur(0);
-}
-
-.hero__lead {
-  max-width: 34rem;
-  margin: 1.5rem 0 0;
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--md-on-surface-variant);
 }
 
 /* --- language chips ----------------------------------------------------- */
@@ -494,86 +437,6 @@ a {
   background: var(--md-outline-variant);
 }
 
-/* --- cards -------------------------------------------------------------- */
-
-.cards {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.25rem;
-  border-radius: var(--md-shape-l);
-  background: var(--md-surface-container-low);
-  color: inherit;
-  text-decoration: none;
-}
-
-.card--link {
-  transition: background-color var(--md-duration-short) var(--md-easing-standard),
-    box-shadow var(--md-duration-short) var(--md-easing-standard),
-    translate var(--md-duration-short) var(--md-easing-standard);
-}
-
-.card--link:hover {
-  background: var(--md-surface-container);
-  box-shadow: var(--md-elev-1);
-  translate: 0 -2px;
-}
-
-.card__head {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-}
-
-.card__icon {
-  width: 48px;
-  height: 48px;
-  flex: none;
-  border-radius: var(--md-shape-m);
-  object-fit: cover;
-}
-
-.card__icon--symbol {
-  display: grid;
-  place-items: center;
-  background: var(--md-primary-container);
-  color: var(--md-on-primary-container);
-}
-
-.card__title {
-  margin: 0;
-  font-size: 1.0625rem;
-  font-weight: 500;
-}
-
-.card__meta {
-  display: block;
-  color: var(--md-on-surface-variant);
-  font-size: 0.8125rem;
-}
-
-.card__body {
-  margin: 0;
-  color: var(--md-on-surface-variant);
-  font-size: 0.9375rem;
-}
-
-.card__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-  margin-top: auto;
-  color: var(--md-primary);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
 /* --- social ------------------------------------------------------------- */
 
 .social {
@@ -604,7 +467,7 @@ a {
   display: grid;
   gap: 2rem;
   align-items: center;
-  padding-block: 3.5rem 2.5rem;
+  padding-block: 4.5rem 2.5rem;
   grid-template-columns: 1fr;
 }
 
@@ -760,6 +623,15 @@ a {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   font-size: 0.8125rem;
   white-space: pre;
+}
+
+/* The install command doubles as the product hero's primary call to action. */
+.install-cmd {
+  max-width: 31rem;
+  margin-top: 1.75rem;
+  padding-left: 1.125rem;
+  border-radius: var(--md-shape-full);
+  box-shadow: inset 0 0 0 1px var(--md-outline-variant);
 }
 
 .prose p {

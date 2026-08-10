@@ -29,38 +29,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles.css" />
-
-    <script>
-      // Applied before first paint so a stored choice never flashes the other scheme.
-      try {
-        var saved = localStorage.getItem("theme");
-        if (saved) document.documentElement.setAttribute("data-theme", saved);
-      } catch (err) {}
-    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="app-bar" id="appBar">
-      <div class="app-bar__inner">
-        <a class="brand" href="/">
-          <span class="brand__mark" aria-hidden="true">e</span>
-          <span>erenium<span class="brand__dim">.tech</span></span>
-        </a>
-        <a class="btn btn--text" href="/">
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
-          Home
-        </a>
-        <button
-          class="icon-btn"
-          id="themeToggle"
-          type="button"
-          aria-label="Switch between light and dark theme"
-        >
-          <span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
-        </button>
-      </div>
-    </header>
 
     <main id="main">
       <section class="product-hero wrap">
@@ -78,13 +49,21 @@
             without triggering keys. Mouse and trackpad stay fully responsive.
           </p>
 
-          <div class="product-hero__actions">
-            <button class="btn btn--filled" type="button" data-copy="brew install --cask erenmalkoc/tap/dirtymac">
+          <div class="code install-cmd">
+            <code>brew install --cask erenmalkoc/tap/dirtymac</code>
+            <button
+              class="icon-btn"
+              type="button"
+              data-copy="brew install --cask erenmalkoc/tap/dirtymac"
+              aria-label="Copy the install command"
+            >
               <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-              Copy brew command
             </button>
+          </div>
+
+          <div class="product-hero__actions">
             <a
-              class="btn btn--tonal"
+              class="btn btn--filled"
               href="https://github.com/erenmalkoc/dirtymac/releases/latest"
               rel="noopener"
             >
@@ -353,7 +332,10 @@
 
     <footer class="footer">
       <div class="wrap footer__inner">
-        <span>© 2026 erenium.tech · dirtymac is MIT licensed</span>
+        <a class="btn btn--text" href="/">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          erenium.tech
+        </a>
         <a href="https://github.com/erenmalkoc/dirtymac/issues" rel="noopener">Report an issue</a>
       </div>
     </footer>

@@ -28,40 +28,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-
-    <script>
-      // Applied before first paint so a stored choice never flashes the other scheme.
-      try {
-        var saved = localStorage.getItem("theme");
-        if (saved) document.documentElement.setAttribute("data-theme", saved);
-      } catch (err) {}
-    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-
-    <header class="app-bar" id="appBar">
-      <div class="app-bar__inner">
-        <a class="brand" href="/">
-          <span class="brand__mark" aria-hidden="true">e</span>
-          <span>erenium<span class="brand__dim">.tech</span></span>
-        </a>
-        <button
-          class="icon-btn"
-          id="themeToggle"
-          type="button"
-          aria-label="Switch between light and dark theme"
-        >
-          <span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
-        </button>
-      </div>
-    </header>
 
     <main id="main">
       <section class="hero wrap">
         <div class="hero__glow" aria-hidden="true"></div>
 
         <h1 class="hello" id="hello">
+          <span class="hello__word" data-lang="tr" lang="tr">Merhaba</span>
           <span class="hello__word" data-lang="en" lang="en">Hello</span>
           <span class="hello__word" data-lang="es" lang="es">Hola</span>
           <span class="hello__word" data-lang="fr" lang="fr">Bonjour</span>
@@ -70,7 +46,10 @@
 
         <ul class="langs" id="langs">
           <li>
-            <button class="chip" type="button" data-lang="en" aria-pressed="true">en</button>
+            <button class="chip" type="button" data-lang="tr" aria-pressed="true">tr</button>
+          </li>
+          <li>
+            <button class="chip" type="button" data-lang="en" aria-pressed="false">en</button>
           </li>
           <li>
             <button class="chip" type="button" data-lang="es" aria-pressed="false">es</button>
@@ -83,50 +62,12 @@
           </li>
         </ul>
 
-        <p class="hero__lead">
-          I'm Eren Malkoç — an independent developer from Manisa, Türkiye. I build small, focused
-          apps for macOS, iOS, Android and the web.
-        </p>
-      </section>
-
-      <hr class="divider" />
-
-      <section class="section wrap" aria-labelledby="products-title">
-        <h2 class="section__title" id="products-title">Products</h2>
-        <p class="section__lead">Things I've shipped and still maintain.</p>
-
-        <div class="cards">
-          <a class="card card--link" href="/dirtymac/">
-            <div class="card__head">
-              <img
-                class="card__icon"
-                src="assets/dirtymac-icon.png"
-                alt=""
-                width="48"
-                height="48"
-              />
-              <div>
-                <h3 class="card__title">dirtymac</h3>
-                <span class="card__meta">macOS · menu bar utility</span>
-              </div>
-            </div>
-            <p class="card__body">
-              Temporarily locks your keyboard so you can clean it without triggering keys. Mouse and
-              trackpad stay fully responsive.
-            </p>
-            <span class="card__cta">
-              Learn more
-              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-            </span>
-          </a>
-        </div>
       </section>
 
       <hr class="divider" />
 
       <section class="section wrap" aria-labelledby="elsewhere-title">
         <h2 class="section__title" id="elsewhere-title">Elsewhere</h2>
-        <p class="section__lead">Code, writing and the professional side of things.</p>
 
         <div class="social">
           <a class="btn btn--outlined" href="https://github.com/erenmalkoc" rel="me noopener">

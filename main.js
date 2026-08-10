@@ -5,50 +5,9 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  /* --- theme -------------------------------------------------------------
-     The stored preference is applied by the inline script in <head> so the
-     page never flashes the wrong scheme; here we only wire up the toggle. */
-
-  function currentTheme() {
-    var stored = document.documentElement.getAttribute("data-theme");
-    if (stored) return stored;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-
-  function syncToggleIcon(button) {
-    var icon = button.querySelector(".material-symbols-outlined");
-    if (icon) icon.textContent = currentTheme() === "dark" ? "light_mode" : "dark_mode";
-  }
-
-  var themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    syncToggleIcon(themeToggle);
-    themeToggle.addEventListener("click", function () {
-      var next = currentTheme() === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      try {
-        localStorage.setItem("theme", next);
-      } catch (err) {
-        /* private mode — the choice just won't survive a reload */
-      }
-      syncToggleIcon(themeToggle);
-    });
-  }
-
-  /* --- app bar ----------------------------------------------------------- */
-
-  var appBar = document.getElementById("appBar");
-  if (appBar) {
-    var updateBar = function () {
-      appBar.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    updateBar();
-    window.addEventListener("scroll", updateBar, { passive: true });
-  }
-
   /* --- greeting cycler ---------------------------------------------------
-     Without JS — or with reduced motion — all four greetings stay visible
-     side by side, so nobody has to wait for a rotation to read them. */
+     Without JS — or with reduced motion — all greetings stay visible side by
+     side, so nobody has to wait for a rotation to read them. */
 
   var hello = document.getElementById("hello");
   var chips = document.querySelectorAll("#langs .chip");
