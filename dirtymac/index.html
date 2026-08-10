@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>dirtymac — erenium.tech</title>
+    <meta
+      name="description"
+      content="dirtymac is a native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive."
+    />
+    <meta name="theme-color" content="#fef7ff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141218" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://erenmalkoc.github.io/dirtymac/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="dirtymac — lock your keyboard, clean your Mac" />
+    <meta
+      property="og:description"
+      content="A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys."
+    />
+    <meta property="og:url" content="https://erenmalkoc.github.io/dirtymac/" />
+    <meta property="og:image" content="https://erenmalkoc.github.io/assets/dirtymac-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+
+    <script>
+      // Applied before first paint so a stored choice never flashes the other scheme.
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved) document.documentElement.setAttribute("data-theme", saved);
+      } catch (err) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="app-bar" id="appBar">
+      <div class="app-bar__inner">
+        <a class="brand" href="/">
+          <span class="brand__mark" aria-hidden="true">e</span>
+          <span>erenium<span class="brand__dim">.tech</span></span>
+        </a>
+        <a class="btn btn--text" href="/">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          Home
+        </a>
+        <button
+          class="icon-btn"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch between light and dark theme"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="product-hero wrap">
+        <div>
+          <img
+            class="product-hero__icon"
+            src="../assets/dirtymac-icon.png"
+            alt="dirtymac app icon"
+            width="512"
+            height="512"
+          />
+          <h1 class="product-hero__title">dirtymac</h1>
+          <p class="product-hero__tagline">
+            A native macOS menu bar utility that temporarily locks your keyboard so you can clean it
+            without triggering keys. Mouse and trackpad stay fully responsive.
+          </p>
+
+          <div class="product-hero__actions">
+            <button class="btn btn--filled" type="button" data-copy="brew install --cask erenmalkoc/tap/dirtymac">
+              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              Copy brew command
+            </button>
+            <a
+              class="btn btn--tonal"
+              href="https://github.com/erenmalkoc/dirtymac/releases/latest"
+              rel="noopener"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>
+              Download DMG
+            </a>
+            <a class="btn btn--outlined" href="https://github.com/erenmalkoc/dirtymac" rel="noopener">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                />
+              </svg>
+              Source
+            </a>
+          </div>
+
+          <ul class="badges">
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">laptop_mac</span>
+              macOS 14 or later
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
+              No network access
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">balance</span>
+              MIT licensed
+            </li>
+          </ul>
+        </div>
+
+        <figure class="demo">
+          <img
+            src="../assets/dirtymac-demo.gif"
+            alt="dirtymac locking the keyboard from the macOS menu bar while the trackpad keeps working"
+            loading="lazy"
+          />
+          <figcaption>Lock from the menu bar, wipe the keys, click once to release.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="why-title">
+        <h2 class="section__title" id="why-title">Why</h2>
+        <div class="prose">
+          <p>
+            Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window full of
+            garbage characters and accidentally launching apps. dirtymac suppresses every keystroke
+            at the system event-tap level until you click stop. Your trackpad keeps working the
+            entire time.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="features-title">
+        <h2 class="section__title" id="features-title">Features</h2>
+        <p class="section__lead">Small utility, but thorough about the edge cases.</p>
+
+        <ul class="features">
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+            <div>
+              <h3>One-click lock</h3>
+              <p>Lock and release straight from the menu bar — no window, no Dock icon.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
+            <div>
+              <h3>Every key, not just letters</h3>
+              <p>
+                Regular keys, modifiers, and the brightness, volume, media and F-key controls are
+                all blocked.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">mouse</span>
+            <div>
+              <h3>Basic mode</h3>
+              <p>Mouse and trackpad stay live — click the menu bar icon to release the lock.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+            <div>
+              <h3>Advanced mode</h3>
+              <p>
+                Optionally freeze the mouse and trackpad too, pick which key classes to block, and
+                set an auto-unlock timer.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">exit_to_app</span>
+            <div>
+              <h3>Always a way out</h3>
+              <p>Hold Esc for three seconds to release — works even in full lockdown.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
+            <div>
+              <h3>Guided first launch</h3>
+              <p>Three-step onboarding with live Accessibility-permission status.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">timer</span>
+            <div>
+              <h3>Live status</h3>
+              <p>
+                Elapsed time and auto-unlock countdown while locked; the event tap re-enables itself
+                if macOS times it out.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+            <div>
+              <h3>12 languages</h3>
+              <p>Runtime language switching and a light / dark override — no relaunch needed.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
+            <div>
+              <h3>Nothing leaves your Mac</h3>
+              <p>No network access, no analytics, no background daemons.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="install-title">
+        <h2 class="section__title" id="install-title">Install</h2>
+        <p class="section__lead">macOS 14 (Sonoma) or later.</p>
+
+        <div class="install">
+          <div class="install__panel">
+            <h3>Homebrew (recommended)</h3>
+            <p>The cask is signed and notarized, and upgrades come through <code>brew</code>.</p>
+            <div class="code">
+              <code>brew install --cask erenmalkoc/tap/dirtymac</code>
+              <button
+                class="icon-btn"
+                type="button"
+                data-copy="brew install --cask erenmalkoc/tap/dirtymac"
+                aria-label="Copy the install command"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              </button>
+            </div>
+            <p style="margin-top: 1rem">
+              Homebrew 6.0 and later require third-party taps to be trusted first. If you see
+              <code>Refusing to load cask … from untrusted tap</code>, trust the tap once and retry:
+            </p>
+            <div class="code">
+              <code>brew trust erenmalkoc/tap</code>
+              <button
+                class="icon-btn"
+                type="button"
+                data-copy="brew trust erenmalkoc/tap"
+                aria-label="Copy the trust command"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="install__panel">
+            <h3>Manual download</h3>
+            <p>
+              Grab the latest signed and notarized DMG, then drag <code>dirtymac.app</code> into
+              <code>/Applications</code>.
+            </p>
+            <a
+              class="btn btn--tonal"
+              href="https://github.com/erenmalkoc/dirtymac/releases/latest"
+              rel="noopener"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>
+              Latest release
+            </a>
+            <p style="margin-top: 1.25rem">
+              Both the app and the DMG carry their own stapled notarization ticket from 1.1.2 on, so
+              the installed copy verifies with no network at all. To check your copy:
+            </p>
+            <div class="code">
+              <code>xcrun stapler validate /Applications/dirtymac.app</code>
+              <button
+                class="icon-btn"
+                type="button"
+                data-copy="xcrun stapler validate /Applications/dirtymac.app"
+                aria-label="Copy the validation command"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="permissions-title">
+        <h2 class="section__title" id="permissions-title">Permissions</h2>
+        <div class="prose">
+          <p>
+            dirtymac needs <strong>Accessibility</strong> access to intercept keyboard events. On
+            first launch, click the menu bar icon and choose <strong>Grant Access</strong>; macOS
+            then prompts you to enable dirtymac in
+            <strong>System Settings → Privacy &amp; Security → Accessibility</strong>. Toggle it on
+            and reopen the popover.
+          </p>
+          <p>The accessibility tap only swallows events — nothing is recorded, logged or forwarded.</p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="how-title">
+        <h2 class="section__title" id="how-title">How it works</h2>
+        <div class="prose">
+          <p>
+            dirtymac creates a <code>CGEventTap</code> at the session level. The event mask is built
+            from the active lock configuration: <code>keyDown</code> and <code>keyUp</code> are
+            always present, while <code>flagsChanged</code>, the aux-control channel behind
+            brightness / volume / media keys, and the mouse, trackpad and scroll types are added only
+            when the matching Advanced toggles are on. The callback returns nothing for blocked
+            events, removing them from the system input queue.
+          </p>
+          <p>
+            In Basic mode the pointer types are never in the mask, so the mouse and trackpad keep
+            working — including the click that opens the menu and releases the lock. Advanced full
+            lockdown adds them, and the universal hold-Esc exit plus a mandatory auto-unlock timer
+            guarantee the lock can always be released. The power button is deliberately let through
+            so a hardware escape hatch always remains. If macOS disables the tap after a timeout,
+            dirtymac re-enables it automatically.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="privacy-title">
+        <h2 class="section__title" id="privacy-title">Privacy</h2>
+        <div class="prose">
+          <p>
+            dirtymac runs entirely on your Mac: no network connections, no telemetry, analytics or
+            crash reporting, and no background processes — quitting the app fully releases the
+            keyboard. The hardened runtime is enabled; the app is unsandboxed because the system
+            event tap requires it.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <hr class="divider" />
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <span>© 2026 erenium.tech · dirtymac is MIT licensed</span>
+        <a href="https://github.com/erenmalkoc/dirtymac/issues" rel="noopener">Report an issue</a>
+      </div>
+    </footer>
+
+    <div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
+
+    <script src="../main.js"></script>
+  </body>
+</html>
