@@ -292,30 +292,41 @@ a {
   overflow: hidden;
 }
 
+/* Full-bleed: the glow spans the whole hero, and `closest-side` makes every
+   layer reach zero opacity exactly at the edges — so nothing is ever clipped
+   into a visible rectangle. */
 .hero__glow {
   position: absolute;
   z-index: -1;
-  inset-inline-start: 50%;
-  top: 4%;
-  width: min(64rem, 145vw);
-  aspect-ratio: 1;
-  translate: -50% 0;
-  border-radius: 50%;
-  /* closest-side keeps both layers fully faded before the circle's own edge,
-     otherwise the element boundary shows up as a hard arc. */
+  inset: 0;
   background:
     radial-gradient(
-      circle closest-side at 50% 46%,
-      color-mix(in srgb, var(--md-primary) 46%, transparent) 0%,
-      color-mix(in srgb, var(--md-primary) 18%, transparent) 44%,
-      transparent 92%
+      ellipse closest-side at 50% 52%,
+      color-mix(in srgb, var(--md-primary) 70%, transparent) 0%,
+      color-mix(in srgb, var(--md-primary) 34%, transparent) 44%,
+      transparent 100%
     ),
     radial-gradient(
-      circle closest-side at 60% 30%,
-      color-mix(in srgb, var(--md-tertiary) 28%, transparent) 0%,
-      transparent 72%
+      ellipse closest-side at 66% 22%,
+      color-mix(in srgb, var(--md-tertiary) 44%, transparent) 0%,
+      transparent 100%
     );
   pointer-events: none;
+}
+
+/* Small pixel wordmark tucked into the top-right corner. */
+.wordmark {
+  position: absolute;
+  top: 1.75rem;
+  right: max(1.25rem, calc((100vw - 68rem) / 2));
+  z-index: 1;
+  font-family: "Press Start 2P", ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  color: var(--md-on-surface-variant);
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hello {
