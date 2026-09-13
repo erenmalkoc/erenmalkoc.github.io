@@ -101,3 +101,11 @@
     })(copyButtons[b]);
   }
 })();
+
+/* Footer year — keeps the copyright current without a redeploy. */
+(function () {
+  "use strict";
+
+  var year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
