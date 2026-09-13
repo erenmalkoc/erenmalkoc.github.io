@@ -416,6 +416,26 @@ a {
   gap: 0.75rem;
 }
 
+/* --- not found ---------------------------------------------------------- */
+
+/* 404.html reuses the hero shell, the glow and the language swap as-is.
+   These two rules only size the line under the numeral and space the button,
+   so nothing on the landing or product pages is touched. */
+
+.notfound__text {
+  max-width: 34rem;
+  margin: 0.75rem 0 0;
+  font-size: 1.125rem;
+  color: var(--md-on-surface-variant);
+}
+
+.notfound__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
 /* --- footer ------------------------------------------------------------- */
 
 .footer {
