@@ -292,33 +292,6 @@ a {
   overflow: hidden;
 }
 
-/* Full-bleed: the glow spans the whole hero, and `closest-side` makes every
-   layer reach zero opacity exactly at the edges — so nothing is ever clipped
-   into a visible rectangle.
-
-   Kept deliberately faint. At the old 70% the primary wash was a saturated
-   blob sitting directly behind the greeting, which both read as a stock
-   template and dragged the headline's contrast down; the two layers also
-   overlapped near the middle and muddied each other. They are now low-alpha
-   and pushed apart, so the type sits on close to flat surface colour. */
-.hero__glow {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background:
-    radial-gradient(
-      ellipse closest-side at 26% 30%,
-      color-mix(in srgb, var(--md-primary) 18%, transparent) 0%,
-      transparent 100%
-    ),
-    radial-gradient(
-      ellipse closest-side at 82% 14%,
-      color-mix(in srgb, var(--md-tertiary) 10%, transparent) 0%,
-      transparent 100%
-    );
-  pointer-events: none;
-}
-
 /* Small pixel wordmark tucked into the top-right corner. */
 .wordmark {
   position: absolute;
