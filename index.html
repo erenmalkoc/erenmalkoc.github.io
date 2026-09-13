@@ -3,25 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Eren Malkoç — independent developer</title>
+    <title>Eren Malkoç</title>
     <meta
       name="description"
-      content="Eren Malkoç — independent developer building small, focused apps and developer tools for macOS, iOS, Android and the web. Flutter, Swift, Kotlin and TypeScript."
+      content="Eren Malkoç — independent developer building small, focused apps for macOS, iOS, Android and the web."
     />
     <meta name="theme-color" content="#fef7ff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#141218" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href="https://erenium.tech/" />
+    <link rel="canonical" href="https://erenmalkoc.github.io/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="erenium.tech" />
-    <meta property="og:locale" content="en" />
-    <meta property="og:title" content="Eren Malkoç — independent developer" />
+    <meta property="og:title" content="erenium.tech — Eren Malkoç" />
     <meta
       property="og:description"
-      content="Small, focused apps and developer tools for macOS, iOS, Android and the web."
+      content="Independent developer building small, focused apps for macOS, iOS, Android and the web."
     />
-    <meta property="og:url" content="https://erenium.tech/" />
+    <meta property="og:url" content="https://erenmalkoc.github.io/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,302 +32,65 @@
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header">
-      <div class="wrap site-header__inner">
-        <a class="wordmark" href="/">erenium</a>
-        <nav class="nav" aria-label="Sections">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a class="nav__cta" href="#contact">Contact</a>
-        </nav>
-      </div>
-    </header>
-
     <main id="main">
       <section class="hero">
-        <div class="hero__backdrop" aria-hidden="true"></div>
+        <div class="hero__glow" aria-hidden="true"></div>
+        <span class="wordmark">erenium</span>
 
-        <div class="wrap hero__inner">
-          <p class="hero__greeting swap">
+        <div class="wrap">
+          <h1 class="hello swap">
             <span class="swap__word" lang="tr">Merhaba</span>
             <span class="swap__word" lang="en">Hello</span>
             <span class="swap__word" lang="es">Hola</span>
             <span class="swap__word" lang="fr">Bonjour</span>
             <span class="swap__word" lang="de">Hallo</span>
-          </p>
-
-          <h1 class="hero__name">Eren Malkoç <span>— independent developer</span></h1>
-
-          <p class="hero__lead">
-            I build small, focused apps and developer tools for macOS, iOS, Android and the web,
-            and publish the reusable parts as open source.
-          </p>
-
-          <div class="hero__actions">
-            <a class="btn btn--filled" href="#work">
-              <span class="material-symbols-outlined" aria-hidden="true">apps</span>
-              See the work
-            </a>
-            <a class="btn btn--outlined" href="#contact">Get in touch</a>
-          </div>
-
-          <ul class="hero__meta">
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
-              Manisa, Türkiye
-            </li>
-            <li>
-              <span class="material-symbols-outlined" aria-hidden="true">code</span>
-              Flutter · Swift · Kotlin · TypeScript
-            </li>
-          </ul>
+          </h1>
         </div>
       </section>
 
-      <hr class="divider" />
+      <section class="section wrap" aria-label="Elsewhere">
+        <h2 class="section__title swap">
+          <span class="swap__word" lang="tr">Buraya Bakın</span>
+          <span class="swap__word" lang="en">Elsewhere</span>
+          <span class="swap__word" lang="es">En otros sitios</span>
+          <span class="swap__word" lang="fr">Ailleurs</span>
+          <span class="swap__word" lang="de">Anderswo</span>
+        </h2>
 
-      <section class="section wrap" id="work" aria-labelledby="work-title">
-        <div class="section__head">
-          <p class="section__eyebrow">Work</p>
-          <h2 class="section__title" id="work-title">Shipped and maintained</h2>
-          <p class="section__lead">
-            Apps in the hands of users and packages other developers build on — all open source.
-          </p>
-        </div>
+        <div class="social">
+          <a class="btn btn--outlined" href="https://github.com/erenmalkoc" rel="me noopener">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              />
+            </svg>
+            GitHub
+          </a>
 
-        <ul class="work">
-          <li class="card">
-            <div class="card__head">
-              <h3 class="card__title">dirtymac</h3>
-              <span class="card__kind">macOS app</span>
-            </div>
-            <p class="card__text">
-              A menu bar utility that temporarily locks your keyboard so you can wipe it down
-              without triggering keys. Mouse and trackpad stay live. Signed, notarized and
-              installable through Homebrew.
-            </p>
-            <ul class="chips">
-              <li>Swift</li>
-              <li>SwiftUI</li>
-              <li>CGEventTap</li>
-            </ul>
-            <div class="card__links">
-              <a class="btn btn--tonal btn--small" href="/dirtymac/">Overview</a>
-              <a
-                class="btn btn--outlined btn--small"
-                href="https://github.com/erenmalkoc/dirtymac"
-                rel="noopener"
-                >Source</a
-              >
-            </div>
-          </li>
+          <a
+            class="btn btn--outlined"
+            href="https://www.linkedin.com/in/eren-malkoc"
+            rel="me noopener"
+          >
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+              />
+            </svg>
+            LinkedIn
+          </a>
 
-          <li class="card">
-            <div class="card__head">
-              <h3 class="card__title">cupertino_liquid_glass</h3>
-              <span class="card__kind">Flutter package</span>
-            </div>
-            <p class="card__text">
-              Widgets that reproduce Apple's iOS Liquid Glass material in Flutter — backdrop blur,
-              specular highlights and a spring-driven tab bar, tuned to render identically on
-              Impeller and Skia.
-            </p>
-            <ul class="chips">
-              <li>Dart</li>
-              <li>Flutter</li>
-              <li>pub.dev</li>
-            </ul>
-            <div class="card__links">
-              <a
-                class="btn btn--tonal btn--small"
-                href="https://pub.dev/packages/cupertino_liquid_glass"
-                rel="noopener"
-                >pub.dev</a
-              >
-              <a
-                class="btn btn--outlined btn--small"
-                href="https://github.com/erenmalkoc/cupertino_liquid_glass"
-                rel="noopener"
-                >Source</a
-              >
-            </div>
-          </li>
-
-          <li class="card">
-            <div class="card__head">
-              <h3 class="card__title">ads_kit</h3>
-              <span class="card__kind">Flutter packages</span>
-            </div>
-            <p class="card__text">
-              A mediation-independent ad abstraction. App code depends on one contract instead of a
-              vendor SDK, so switching between Unity LevelPlay and AppLovin MAX is a remote-config
-              value rather than a store release.
-            </p>
-            <ul class="chips">
-              <li>Dart</li>
-              <li>Flutter</li>
-              <li>Melos workspace</li>
-            </ul>
-            <div class="card__links">
-              <a
-                class="btn btn--tonal btn--small"
-                href="https://pub.dev/packages/ads_kit"
-                rel="noopener"
-                >pub.dev</a
-              >
-              <a
-                class="btn btn--outlined btn--small"
-                href="https://github.com/erenmalkoc/ads_kit"
-                rel="noopener"
-                >Source</a
-              >
-            </div>
-          </li>
-
-          <li class="card">
-            <div class="card__head">
-              <h3 class="card__title">snaplock</h3>
-              <span class="card__kind">Android app</span>
-            </div>
-            <p class="card__text">
-              A KeePass-compatible password manager. It opens a <code>.kdbx</code> database, keeps
-              the decoded copy in memory for the session only, and clears it the moment the app is
-              locked or backgrounded.
-            </p>
-            <ul class="chips">
-              <li>Kotlin</li>
-              <li>Jetpack Compose</li>
-              <li>Kotpass</li>
-            </ul>
-            <div class="card__links">
-              <a
-                class="btn btn--outlined btn--small"
-                href="https://github.com/erenmalkoc/snaplock-v2"
-                rel="noopener"
-                >Source</a
-              >
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <hr class="divider" />
-
-      <section class="section wrap" id="about" aria-labelledby="about-title">
-        <div class="section__head">
-          <p class="section__eyebrow">About</p>
-          <h2 class="section__title" id="about-title">How I work</h2>
-        </div>
-
-        <div class="about">
-          <div>
-            <p>
-              I am a developer from Manisa, Türkiye, working mostly on mobile. Most of what I ship
-              is small on purpose: a utility that does one thing, or a package that removes one
-              recurring problem from an app I was already building.
-            </p>
-            <p>
-              When a piece of an app turns out to be worth reusing, it becomes its own package with
-              its own tests, CI and documentation, rather than staying buried in a repository.
-              That is where <a href="https://pub.dev/packages/ads_kit">ads_kit</a> and
-              <a href="https://pub.dev/packages/cupertino_liquid_glass">cupertino_liquid_glass</a>
-              came from.
-            </p>
-            <p>
-              Everything I release is open source, and the things that reach users are signed,
-              notarized and shipped through the channels their platform expects.
-            </p>
-          </div>
-
-          <dl class="stack">
-            <dt>Mobile</dt>
-            <dd>Flutter &amp; Dart, Kotlin with Jetpack Compose, Swift with SwiftUI</dd>
-            <dt>Web &amp; backend</dt>
-            <dd>TypeScript, Node.js</dd>
-            <dt>Delivery</dt>
-            <dd>GitHub Actions, Fastlane, Homebrew, pub.dev, Firebase</dd>
-          </dl>
-        </div>
-      </section>
-
-      <hr class="divider" />
-
-      <section class="section wrap" id="contact" aria-labelledby="contact-title">
-        <div class="contact">
-          <h2 class="contact__title" id="contact-title">Get in touch</h2>
-          <p class="contact__lead">
-            Open to freelance and contract work on mobile apps and developer tooling. The fastest
-            way to reach me is email.
-          </p>
-
-          <div class="code install-cmd">
-            <code>malkoceren24@gmail.com</code>
-            <button
-              class="icon-btn"
-              type="button"
-              data-copy="malkoceren24@gmail.com"
-              aria-label="Copy the email address"
-            >
-              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-            </button>
-          </div>
-
-          <div class="social">
-            <a class="btn btn--filled" href="mailto:malkoceren24@gmail.com">
-              <span class="material-symbols-outlined" aria-hidden="true">mail</span>
-              Email me
-            </a>
-
-            <a class="btn btn--outlined" href="https://github.com/erenmalkoc" rel="me noopener">
-              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-              GitHub
-            </a>
-
-            <a
-              class="btn btn--outlined"
-              href="https://www.linkedin.com/in/eren-malkoc"
-              rel="me noopener"
-            >
-              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                />
-              </svg>
-              LinkedIn
-            </a>
-
-            <a class="btn btn--outlined" href="https://medium.com/@malkoceren24" rel="me noopener">
-              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
-                />
-              </svg>
-              Medium
-            </a>
-          </div>
+          <a class="btn btn--outlined" href="https://medium.com/@malkoceren24" rel="me noopener">
+            <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
+              />
+            </svg>
+            Medium
+          </a>
         </div>
       </section>
     </main>
-
-    <hr class="divider" />
-
-    <footer class="footer">
-      <div class="wrap footer__inner">
-        <span>© <span id="year">2026</span> Eren Malkoç</span>
-        <div class="footer__links">
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a href="https://github.com/erenmalkoc" rel="me noopener">GitHub</a>
-          <a href="mailto:malkoceren24@gmail.com">Email</a>
-        </div>
-      </div>
-    </footer>
-
-    <div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
 
     <script src="main.js"></script>
   </body>
