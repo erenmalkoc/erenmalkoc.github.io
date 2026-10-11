@@ -391,7 +391,7 @@ a {
 
 /* --- not found ---------------------------------------------------------- */
 
-/* 404.html reuses the hero shell, the glow and the language swap as-is.
+/* 404.html reuses the hero shell and the language swap as-is.
    These two rules only size the line under the numeral and space the button,
    so nothing on the landing or product pages is touched. */
 
@@ -570,6 +570,15 @@ a {
   margin: 0 0 1rem;
   color: var(--md-on-surface-variant);
   font-size: 0.9375rem;
+}
+
+/* A follow-up note under a code block or button inside an install panel. */
+.install__panel .install__note {
+  margin-top: 1rem;
+}
+
+.install__panel .btn + .install__note {
+  margin-top: 1.25rem;
 }
 
 .code {
