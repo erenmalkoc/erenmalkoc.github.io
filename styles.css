@@ -1,35 +1,36 @@
 /* ---------------------------------------------------------------------------
    erenium.tech — Material Design 3 baseline
-   Tokens follow the M3 baseline scheme (seed #6750A4).
+   Tokens follow the M3 baseline scheme in neutral grays: each baseline colour
+   is replaced by the gray of the same luminance, so contrast is unchanged.
 --------------------------------------------------------------------------- */
 
 :root {
   /* color — light */
-  --md-primary: #6750a4;
+  --md-primary: #5e5e5e;
   --md-on-primary: #ffffff;
-  --md-primary-container: #eaddff;
-  --md-on-primary-container: #21005d;
-  --md-secondary: #625b71;
+  --md-primary-container: #e2e2e2;
+  --md-on-primary-container: #1b1b1b;
+  --md-secondary: #5e5e5e;
   --md-on-secondary: #ffffff;
-  --md-secondary-container: #e8def8;
-  --md-on-secondary-container: #1d192b;
-  --md-tertiary: #7d5260;
+  --md-secondary-container: #e2e2e2;
+  --md-on-secondary-container: #1c1c1c;
+  --md-tertiary: #5e5e5e;
   --md-on-tertiary: #ffffff;
-  --md-tertiary-container: #ffd8e4;
-  --md-on-tertiary-container: #31111d;
-  --md-surface: #fef7ff;
-  --md-on-surface: #1d1b20;
-  --md-surface-variant: #e7e0ec;
-  --md-on-surface-variant: #49454f;
-  --md-outline: #79747e;
-  --md-outline-variant: #cac4d0;
+  --md-tertiary-container: #e2e2e2;
+  --md-on-tertiary-container: #1c1c1c;
+  --md-surface: #f9f9f9;
+  --md-on-surface: #1c1c1c;
+  --md-surface-variant: #e2e2e2;
+  --md-on-surface-variant: #474747;
+  --md-outline: #767676;
+  --md-outline-variant: #c6c6c6;
   --md-surface-container-lowest: #ffffff;
-  --md-surface-container-low: #f7f2fa;
-  --md-surface-container: #f3edf7;
-  --md-surface-container-high: #ece6f0;
-  --md-surface-container-highest: #e6e0e9;
-  --md-inverse-surface: #322f35;
-  --md-inverse-on-surface: #f5eff7;
+  --md-surface-container-low: #f4f4f4;
+  --md-surface-container: #efefef;
+  --md-surface-container-high: #e8e8e8;
+  --md-surface-container-highest: #e2e2e2;
+  --md-inverse-surface: #303030;
+  --md-inverse-on-surface: #f1f1f1;
   --md-scrim: 0 0 0;
 
   /* shape */
@@ -55,60 +56,60 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --md-primary: #d0bcff;
-    --md-on-primary: #381e72;
-    --md-primary-container: #4f378b;
-    --md-on-primary-container: #eaddff;
-    --md-secondary: #ccc2dc;
-    --md-on-secondary: #332d41;
-    --md-secondary-container: #4a4458;
-    --md-on-secondary-container: #e8def8;
-    --md-tertiary: #efb8c8;
-    --md-on-tertiary: #492532;
-    --md-tertiary-container: #633b48;
-    --md-on-tertiary-container: #ffd8e4;
-    --md-surface: #141218;
-    --md-on-surface: #e6e0e9;
-    --md-surface-variant: #49454f;
-    --md-on-surface-variant: #cac4d0;
-    --md-outline: #938f99;
-    --md-outline-variant: #49454f;
-    --md-surface-container-lowest: #0f0d13;
-    --md-surface-container-low: #1d1b20;
-    --md-surface-container: #211f26;
-    --md-surface-container-high: #2b2930;
-    --md-surface-container-highest: #36343b;
-    --md-inverse-surface: #e6e0e9;
-    --md-inverse-on-surface: #322f35;
+    --md-primary: #c6c6c6;
+    --md-on-primary: #303030;
+    --md-primary-container: #474747;
+    --md-on-primary-container: #e2e2e2;
+    --md-secondary: #c6c6c6;
+    --md-on-secondary: #303030;
+    --md-secondary-container: #474747;
+    --md-on-secondary-container: #e2e2e2;
+    --md-tertiary: #c7c7c7;
+    --md-on-tertiary: #303030;
+    --md-tertiary-container: #474747;
+    --md-on-tertiary-container: #e2e2e2;
+    --md-surface: #131313;
+    --md-on-surface: #e2e2e2;
+    --md-surface-variant: #474747;
+    --md-on-surface-variant: #c6c6c6;
+    --md-outline: #919191;
+    --md-outline-variant: #474747;
+    --md-surface-container-lowest: #0e0e0e;
+    --md-surface-container-low: #1c1c1c;
+    --md-surface-container: #202020;
+    --md-surface-container-high: #2a2a2a;
+    --md-surface-container-highest: #353535;
+    --md-inverse-surface: #e2e2e2;
+    --md-inverse-on-surface: #303030;
   }
 }
 
 :root[data-theme="dark"] {
-  --md-primary: #d0bcff;
-  --md-on-primary: #381e72;
-  --md-primary-container: #4f378b;
-  --md-on-primary-container: #eaddff;
-  --md-secondary: #ccc2dc;
-  --md-on-secondary: #332d41;
-  --md-secondary-container: #4a4458;
-  --md-on-secondary-container: #e8def8;
-  --md-tertiary: #efb8c8;
-  --md-on-tertiary: #492532;
-  --md-tertiary-container: #633b48;
-  --md-on-tertiary-container: #ffd8e4;
-  --md-surface: #141218;
-  --md-on-surface: #e6e0e9;
-  --md-surface-variant: #49454f;
-  --md-on-surface-variant: #cac4d0;
-  --md-outline: #938f99;
-  --md-outline-variant: #49454f;
-  --md-surface-container-lowest: #0f0d13;
-  --md-surface-container-low: #1d1b20;
-  --md-surface-container: #211f26;
-  --md-surface-container-high: #2b2930;
-  --md-surface-container-highest: #36343b;
-  --md-inverse-surface: #e6e0e9;
-  --md-inverse-on-surface: #322f35;
+  --md-primary: #c6c6c6;
+  --md-on-primary: #303030;
+  --md-primary-container: #474747;
+  --md-on-primary-container: #e2e2e2;
+  --md-secondary: #c6c6c6;
+  --md-on-secondary: #303030;
+  --md-secondary-container: #474747;
+  --md-on-secondary-container: #e2e2e2;
+  --md-tertiary: #c7c7c7;
+  --md-on-tertiary: #303030;
+  --md-tertiary-container: #474747;
+  --md-on-tertiary-container: #e2e2e2;
+  --md-surface: #131313;
+  --md-on-surface: #e2e2e2;
+  --md-surface-variant: #474747;
+  --md-on-surface-variant: #c6c6c6;
+  --md-outline: #919191;
+  --md-outline-variant: #474747;
+  --md-surface-container-lowest: #0e0e0e;
+  --md-surface-container-low: #1c1c1c;
+  --md-surface-container: #202020;
+  --md-surface-container-high: #2a2a2a;
+  --md-surface-container-highest: #353535;
+  --md-inverse-surface: #e2e2e2;
+  --md-inverse-on-surface: #303030;
 }
 
 *,
