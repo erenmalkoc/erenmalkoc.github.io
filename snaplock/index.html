@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snaplock — erenium.tech</title>
+    <meta
+      name="description"
+      content="Snaplock is a free, open-source KeePass password manager for Android with autofill, passkeys, 2FA codes and sync-safe saving. Your vault is a file you own."
+    />
+    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://erenium.tech/snaplock/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Snaplock — KeePass password manager for Android" />
+    <meta
+      property="og:description"
+      content="Autofill, passkeys and 2FA codes on your own KeePass file. Free, open source, no account."
+    />
+    <meta property="og:url" content="https://erenium.tech/snaplock/" />
+    <meta property="og:image" content="https://erenium.tech/assets/snaplock-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Icons load as a subset: icon_names must list every Material Symbols name
+         this page renders, in alphabetical order, or a new icon shows up as its
+         ligature text. Keep it a separate request, because icon_names subsets
+         every family in the same request (Roboto would lose most glyphs). -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=android,arrow_back,backup,balance,cloud_off,content_copy,download,folder_open,health_and_safety,key,keyboard,lock,passkey,password,swap_horiz,sync,tablet_android,verified_user&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <main id="main">
+      <section class="product-hero wrap">
+        <div>
+          <img
+            class="product-hero__icon"
+            src="../assets/snaplock-icon.svg"
+            alt="Snaplock app icon"
+            width="352"
+            height="352"
+          />
+          <h1 class="product-hero__title">Snaplock</h1>
+          <p class="product-hero__tagline">
+            A KeePass password manager that feels like part of Android. Autofill, passkeys and 2FA
+            codes on a vault that is simply an encrypted file you own: keep it on the phone or sync
+            it with anything, and open it with KeePassXC on your computer.
+          </p>
+
+          <div class="product-hero__actions">
+            <a
+              class="btn btn--filled"
+              href="https://github.com/erenmalkoc/snaplock-v2/releases/latest"
+              rel="noopener"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>
+              Download APK
+            </a>
+            <a class="btn btn--outlined" href="https://github.com/erenmalkoc/snaplock-v2" rel="noopener">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                />
+              </svg>
+              Source
+            </a>
+          </div>
+
+          <ul class="badges">
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">android</span>
+              Android 7.0 or later
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">key</span>
+              KeePass KDBX 3 and 4
+            </li>
+            <li>
+              <span class="material-symbols-outlined" aria-hidden="true">balance</span>
+              GPL-3.0 licensed
+            </li>
+          </ul>
+        </div>
+
+        <figure class="demo demo--phone">
+          <img
+            src="../assets/snaplock-entries.webp"
+            alt="Snaplock's entry list with site icons, a search field and a button for a new entry"
+            width="540"
+            height="1170"
+            loading="lazy"
+          />
+          <figcaption>Your entries, with the sites' own icons.</figcaption>
+        </figure>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="why-title">
+        <h2 class="section__title" id="why-title">Why</h2>
+        <div class="prose">
+          <p>
+            Most password managers keep your vault on their servers. KeePass keeps it in one
+            encrypted file that you control, and many apps on every platform can open it. Snaplock
+            brings that file to Android without giving up what makes the big managers convenient:
+            sign-in suggestions in the keyboard, passkeys in the system sheet, and changes from your
+            other devices merged in instead of overwritten.
+          </p>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="features-title">
+        <h2 class="section__title" id="features-title">Features</h2>
+        <p class="section__lead">Everything a password manager needs, on a file you own.</p>
+
+        <ul class="features">
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
+            <div>
+              <h3>Autofill</h3>
+              <p>
+                Logins suggested in the keyboard in apps and browsers, 2FA codes filled after the
+                password, and new logins offered to save.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">passkey</span>
+            <div>
+              <h3>Passkeys</h3>
+              <p>
+                Create and use passkeys from the Android 14+ sign-in sheet. They are stored the way
+                KeePassXC stores them, so its browser extension can use them too.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">sync</span>
+            <div>
+              <h3>Safe with sync</h3>
+              <p>
+                Edited the vault on another device through Syncthing or a cloud drive? Snaplock
+                merges those changes before it saves, the way KeePass does.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">folder_open</span>
+            <div>
+              <h3>The whole KeePass vault</h3>
+              <p>
+                Groups, custom fields, attachments, entry history, a recycle bin and key files.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+            <div>
+              <h3>2FA codes</h3>
+              <p>TOTP and Steam Guard codes, added from a QR code or a setup key.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">password</span>
+            <div>
+              <h3>Generator</h3>
+              <p>Passwords and passphrases from the EFF wordlist, with a strength meter.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">health_and_safety</span>
+            <div>
+              <h3>Password health</h3>
+              <p>
+                Finds weak, reused, old and expired passwords on the device, and can check them
+                against known breaches if you turn that on.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">backup</span>
+            <div>
+              <h3>Daily backups</h3>
+              <p>A copy of the encrypted vault from before each day's first save, kept for a week.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+            <div>
+              <h3>Your choice of encryption</h3>
+              <p>
+                AES-256, ChaCha20 or Twofish with Argon2 or AES-KDF, plus a benchmark that sets
+                unlocking to about a second on your phone.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">swap_horiz</span>
+            <div>
+              <h3>Import and export</h3>
+              <p>
+                Bring logins in from Bitwarden, Chrome, Firefox, 1Password, Proton Pass, LastPass or
+                KeePassXC, and export them as CSV.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">tablet_android</span>
+            <div>
+              <h3>Part of Android</h3>
+              <p>
+                Material You, a Quick Settings tile to lock the vault, launcher shortcuts, and the
+                list and entry side by side on tablets and foldables.
+              </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
+            <div>
+              <h3>No account, no tracking</h3>
+              <p>
+                No servers, analytics or ads. The two online features, the breach check and site
+                icons, stay off until you turn them on.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="install-title">
+        <h2 class="section__title" id="install-title">Install</h2>
+        <p class="section__lead">Android 7.0 or later. Passkeys need Android 14.</p>
+
+        <div class="install">
+          <div class="install__panel">
+            <h3>GitHub</h3>
+            <p>
+              Download the signed APK from the latest release and open it on your phone. Every
+              release is built reproducibly from its tag, so anyone can rebuild it from source and
+              get the same file.
+            </p>
+            <a
+              class="btn btn--tonal"
+              href="https://github.com/erenmalkoc/snaplock-v2/releases/latest"
+              rel="noopener"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>
+              Latest release
+            </a>
+          </div>
+
+          <div class="install__panel">
+            <h3>F-Droid</h3>
+            <p>
+              Snaplock is in review for F-Droid. F-Droid will ship the same signed APK, so you can
+              switch between the two later without reinstalling.
+            </p>
+            <p class="install__note">To check that a copy is genuine, compare its signing certificate:</p>
+            <div class="code">
+              <code>apksigner verify --print-certs snaplock.apk</code>
+              <button
+                class="icon-btn"
+                type="button"
+                data-copy="apksigner verify --print-certs snaplock.apk"
+                aria-label="Copy the verification command"
+              >
+                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+              </button>
+            </div>
+            <p class="install__note">
+              The certificate SHA-256 must be
+              <code>e66b0d23e679d1d606573be6f705630f9f90e74be084ec4b59d1181ae608b8b7</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="section wrap" aria-labelledby="privacy-title">
+        <h2 class="section__title" id="privacy-title">Privacy</h2>
+        <div class="prose">
+          <p>
+            Your vault never leaves the file you chose, and Snaplock has no account or server. The
+            decrypted vault lives only in memory and is dropped when it locks. If you turn on the
+            breach check, only the first 5 characters of each password's SHA-1 hash are sent to Have
+            I Been Pwned; if you download site icons, each website is asked for its own icon.
+          </p>
+          <p><a href="privacy.html">Read the full privacy policy</a>.</p>
+        </div>
+      </section>
+    </main>
+
+    <hr class="divider" />
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="btn btn--text" href="/">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          erenium.tech
+        </a>
+        <a href="https://github.com/erenmalkoc/snaplock-v2/issues" rel="noopener">Report an issue</a>
+      </div>
+    </footer>
+
+    <div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
+
+    <script src="../main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snaplock privacy policy — erenium.tech</title>
+    <meta name="description" content="What Snaplock does with your data: it keeps your vault in your own file and collects nothing." />
+    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://erenium.tech/snaplock/privacy.html" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <main id="main">
+      <section class="section wrap" aria-labelledby="policy-title">
+        <h1 class="section__title" id="policy-title">Snaplock privacy policy</h1>
+        <p class="section__lead">Effective 18 October 2026.</p>
+
+        <div class="prose">
+          <p>
+            Snaplock is a password manager for Android made by Eren Malkoç. This policy covers the
+            app as distributed on GitHub, F-Droid and Google Play.
+          </p>
+
+          <h2>What Snaplock collects</h2>
+          <p>
+            Nothing. Snaplock has no account, no server, no analytics, no crash reporting and no ads.
+            The developer receives no data from the app.
+          </p>
+
+          <h2>Your vault</h2>
+          <p>
+            Your passwords, passkeys and other entries are stored in a KeePass file that you choose,
+            encrypted with your master password, key file or both. Snaplock reads and writes only that
+            file, through Android's file picker. Whether the file is synced elsewhere is up to you
+            and the app you use for it. The decrypted vault is kept in memory only while it is
+            unlocked.
+          </p>
+          <p>
+            Before the first save of each day, Snaplock keeps a copy of the encrypted file in its
+            own storage on your device for 7 days. These copies are excluded from Android backups.
+            If you turn on biometric unlock, your master password is encrypted with a key that never
+            leaves your device's secure hardware and is also excluded from backups.
+          </p>
+
+          <h2>Optional online features</h2>
+          <p>Both are off until you turn them on in Snaplock's settings.</p>
+          <ul>
+            <li>
+              <strong>Breach check.</strong> To check a password against known breaches, Snaplock
+              sends the first 5 characters of its SHA-1 hash to Have I Been Pwned
+              (api.pwnedpasswords.com). The password and its full hash never leave the device. Have I
+              Been Pwned's own privacy policy applies to that request.
+            </li>
+            <li>
+              <strong>Site icons.</strong> To show a website's icon next to an entry, Snaplock asks
+              that website (or the server its page names for the icon) for it and stores the icon in
+              your vault. The website sees an ordinary request from your phone.
+            </li>
+          </ul>
+
+          <h2>Permissions</h2>
+          <ul>
+            <li><strong>Internet</strong>, only for the two optional features above.</li>
+            <li><strong>Camera</strong>, only when you scan a 2FA QR code.</li>
+            <li><strong>Biometrics</strong>, only if you turn on biometric unlock or use passkeys.</li>
+            <li>
+              <strong>Autofill and Credential Manager</strong> services, only if you choose Snaplock
+              as your password service. They read the sign-in form on screen to suggest your entries
+              and do not keep or send it anywhere.
+            </li>
+          </ul>
+
+          <h2>Deleting your data</h2>
+          <p>
+            Delete the vault file to delete your data. Uninstalling Snaplock removes its settings and
+            daily backup copies from the device.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+            Questions about this policy: <a href="mailto:malkoceren24@gmail.com">malkoceren24@gmail.com</a>,
+            or open an issue on
+            <a href="https://github.com/erenmalkoc/snaplock-v2/issues" rel="noopener">GitHub</a>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <hr class="divider" />
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="btn btn--text" href="./">
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+          Snaplock
+        </a>
+        <a href="https://github.com/erenmalkoc/snaplock-v2/issues" rel="noopener">Report an issue</a>
+      </div>
+    </footer>
+
+    <script src="../main.js"></script>
+  </body>
+</html>

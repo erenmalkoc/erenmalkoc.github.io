@@ -514,6 +514,12 @@ a {
   font-size: 0.8125rem;
 }
 
+/* Phone screenshots are tall: keep them at a phone-like width. */
+.demo--phone img {
+  max-width: 18rem;
+  margin-inline: auto;
+}
+
 .features {
   display: grid;
   gap: 1rem;
@@ -578,6 +584,11 @@ a {
   margin-top: 1rem;
 }
 
+/* Long unbroken values such as certificate fingerprints wrap on narrow screens. */
+.install__note code {
+  overflow-wrap: anywhere;
+}
+
 .install__panel .btn + .install__note {
   margin-top: 1.25rem;
 }
@@ -619,6 +630,24 @@ a {
   background: var(--md-surface-container-high);
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   font-size: 0.875em;
+}
+
+/* Long-form pages such as privacy policies use headings and lists in prose. */
+.prose h2 {
+  margin: 2rem 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.prose ul {
+  max-width: 42rem;
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  color: var(--md-on-surface-variant);
+}
+
+.prose li + li {
+  margin-top: 0.5rem;
 }
 
 .snackbar {
