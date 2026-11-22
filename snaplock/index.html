@@ -267,9 +267,18 @@
           <div class="install__panel">
             <h3>F-Droid</h3>
             <p>
-              Snaplock is in review for F-Droid. F-Droid will ship the same signed APK, so you can
-              switch between the two later without reinstalling.
+              Snaplock is available on F-Droid. F-Droid builds the same commit and ships the same
+              signed APK, usually a few days after a GitHub release, so you can switch between the
+              two without reinstalling.
             </p>
+            <a
+              class="btn btn--tonal"
+              href="https://f-droid.org/packages/com.erenium.snaplock/"
+              rel="noopener"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">download</span>
+              Get it on F-Droid
+            </a>
             <p class="install__note">To check that a copy is genuine, compare its signing certificate:</p>
             <div class="code">
               <code>apksigner verify --print-certs snaplock.apk</code>
