@@ -1,0 +1,647 @@
+/* ---------------------------------------------------------------------------
+   dirtymac theme
+   The page borrows the app's own look: a native macOS menu bar utility with
+   frosted material panels, the system font, a blue taken from the app icon,
+   the red and green of its status pill and the big round power button.
+   Loaded after ../styles.css, so it only overrides tokens and adds what the
+   product page needs.
+--------------------------------------------------------------------------- */
+
+.theme-dirtymac {
+  --md-primary: #2a5de0;
+  --md-on-primary: #ffffff;
+  --md-primary-container: #dbe6ff;
+  --md-on-primary-container: #0b2a7a;
+  --md-secondary: #5a6275;
+  --md-on-secondary: #ffffff;
+  --md-secondary-container: #e6e9f2;
+  --md-on-secondary-container: #1c2233;
+  --md-tertiary: #5a6275;
+  --md-on-tertiary: #ffffff;
+  --md-tertiary-container: #e6e9f2;
+  --md-on-tertiary-container: #1c2233;
+  --md-surface: #f5f5f7;
+  --md-on-surface: #1d1d1f;
+  --md-surface-variant: #e8e8ed;
+  --md-on-surface-variant: #55555a;
+  --md-outline: #86868b;
+  --md-outline-variant: #d2d2d7;
+  --md-surface-container-lowest: #ffffff;
+  --md-surface-container-low: #fbfbfd;
+  --md-surface-container: #f0f0f4;
+  --md-surface-container-high: #e8e8ed;
+  --md-surface-container-highest: #e0e0e6;
+  --md-inverse-surface: #1d1d1f;
+  --md-inverse-on-surface: #f5f5f7;
+
+  --glass: rgb(255 255 255 / 0.62);
+  --glass-border: rgb(0 0 0 / 0.07);
+  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 28px -12px rgb(0 0 0 / 0.14);
+  --glow: rgb(42 93 224 / 0.16);
+  --glow-2: rgb(120 140 255 / 0.12);
+  --accent-top: #5a8ff5;
+  --accent-bottom: #2a5de0;
+  --ok: #34c759;
+  --danger: #ff3b30;
+
+  --menubar-bg: rgb(255 255 255 / 0.38);
+  --menubar-ink: rgb(0 0 0 / 0.82);
+  --popover-bg: rgb(246 246 248 / 0.74);
+  --popover-ink: #1d1d1f;
+  --popover-ink-2: rgb(60 60 67 / 0.62);
+  --popover-ink-3: rgb(60 60 67 / 0.32);
+  --popover-rule: rgb(0 0 0 / 0.1);
+  --popover-material: rgb(255 255 255 / 0.74);
+  --popover-stroke: rgb(0 0 0 / 0.08);
+  --popover-ring: 0 0 0 0.5px rgb(0 0 0 / 0.2), 0 22px 56px -8px rgb(10 20 60 / 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-dirtymac {
+    --md-primary: #7aa4ff;
+    --md-on-primary: #0b1f5c;
+    --md-primary-container: #1f3fa0;
+    --md-on-primary-container: #dbe6ff;
+    --md-secondary: #aeb6ca;
+    --md-on-secondary: #1c2233;
+    --md-secondary-container: #2c3347;
+    --md-on-secondary-container: #e6e9f2;
+    --md-tertiary: #aeb6ca;
+    --md-on-tertiary: #1c2233;
+    --md-tertiary-container: #2c3347;
+    --md-on-tertiary-container: #e6e9f2;
+    --md-surface: #161618;
+    --md-on-surface: #f5f5f7;
+    --md-surface-variant: #2c2c2e;
+    --md-on-surface-variant: #aeaeb2;
+    --md-outline: #636366;
+    --md-outline-variant: #3a3a3c;
+    --md-surface-container-lowest: #0f0f10;
+    --md-surface-container-low: #1c1c1e;
+    --md-surface-container: #212124;
+    --md-surface-container-high: #2c2c2e;
+    --md-surface-container-highest: #38383a;
+    --md-inverse-surface: #f5f5f7;
+    --md-inverse-on-surface: #1d1d1f;
+
+    --glass: rgb(44 44 46 / 0.55);
+    --glass-border: rgb(255 255 255 / 0.09);
+    --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 30px -12px rgb(0 0 0 / 0.6);
+    --glow: rgb(70 120 255 / 0.2);
+    --glow-2: rgb(110 90 255 / 0.12);
+    --accent-top: #5f8fff;
+    --accent-bottom: #2f62ea;
+    --ok: #30d158;
+    --danger: #ff453a;
+
+    --menubar-bg: rgb(30 30 34 / 0.45);
+    --menubar-ink: rgb(255 255 255 / 0.9);
+    --popover-bg: rgb(40 40 44 / 0.72);
+    --popover-ink: #f5f5f7;
+    --popover-ink-2: rgb(235 235 245 / 0.6);
+    --popover-ink-3: rgb(235 235 245 / 0.3);
+    --popover-rule: rgb(255 255 255 / 0.12);
+    --popover-material: rgb(255 255 255 / 0.1);
+    --popover-stroke: rgb(255 255 255 / 0.14);
+    --popover-ring: 0 0 0 0.5px rgb(255 255 255 / 0.22), 0 22px 56px -8px rgb(0 0 0 / 0.7);
+  }
+}
+
+.theme-dirtymac {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", Roboto,
+    sans-serif;
+  letter-spacing: -0.003em;
+  background: radial-gradient(60rem 34rem at 88% -10%, var(--glow), transparent 70%),
+    radial-gradient(46rem 30rem at -12% 22%, var(--glow-2), transparent 70%), var(--md-surface);
+}
+
+.theme-dirtymac .skip-link {
+  background: var(--md-primary);
+  color: var(--md-on-primary);
+}
+
+/* A grid track must be allowed to shrink below its content, or a wide command
+   or caption pushes the whole page sideways on a phone. */
+.theme-dirtymac .product-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 52rem) {
+  .theme-dirtymac .product-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+}
+
+/* --- type ----------------------------------------------------------------- */
+
+.theme-dirtymac .product-hero__title {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+.theme-dirtymac .section__title {
+  font-size: 1.75rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.theme-dirtymac .divider {
+  background: var(--md-outline-variant);
+  opacity: 0.55;
+}
+
+/* --- buttons: capsule controls like the app's -------------------------------- */
+
+.theme-dirtymac .btn {
+  min-height: 2.5rem;
+  font-size: 0.9375rem;
+  font-weight: 590;
+  letter-spacing: -0.006em;
+}
+
+.theme-dirtymac .btn--filled {
+  background: linear-gradient(180deg, var(--accent-top), var(--accent-bottom));
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 1px 2px rgb(0 0 0 / 0.2),
+    0 8px 18px -8px rgb(42 93 224 / 0.7);
+}
+
+.theme-dirtymac .btn--filled:hover {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 1px 2px rgb(0 0 0 / 0.2),
+    0 10px 22px -8px rgb(42 93 224 / 0.8);
+}
+
+.theme-dirtymac .btn--outlined {
+  background: var(--glass);
+  box-shadow: inset 0 0 0 1px var(--glass-border), var(--glass-shadow);
+  color: var(--md-on-surface);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+
+.theme-dirtymac .btn--tonal {
+  background: rgb(42 93 224 / 0.12);
+  color: var(--md-primary);
+}
+
+.theme-dirtymac .badges li {
+  background: var(--glass);
+  color: var(--md-on-surface-variant);
+  box-shadow: inset 0 0 0 1px var(--glass-border);
+}
+
+/* --- glass surfaces ----------------------------------------------------------- */
+
+.theme-dirtymac .feature,
+.theme-dirtymac .install__panel,
+.theme-dirtymac .demo {
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  backdrop-filter: blur(22px) saturate(1.5);
+}
+
+.theme-dirtymac .feature {
+  padding: 1.25rem;
+  border-radius: 1.125rem;
+}
+
+.theme-dirtymac .install__panel {
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+}
+
+.theme-dirtymac .feature h3,
+.theme-dirtymac .install__panel h3 {
+  font-weight: 620;
+  letter-spacing: -0.01em;
+}
+
+/* The icon sits in a rounded square, the way System Settings shows its panes. */
+.theme-dirtymac .feature .material-symbols-outlined {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 22%;
+  background: linear-gradient(180deg, var(--accent-top), var(--accent-bottom));
+  color: #fff;
+  font-size: 1.25rem;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 2px 6px -2px rgb(42 93 224 / 0.6);
+}
+
+.theme-dirtymac .code {
+  background: var(--md-surface-container-high);
+  border: 1px solid var(--glass-border);
+}
+
+.theme-dirtymac .code code,
+.theme-dirtymac .prose code {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace;
+}
+
+.theme-dirtymac .install-cmd {
+  box-shadow: inset 0 0 0 1px var(--glass-border);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+
+.theme-dirtymac .product-hero__icon {
+  width: min(10.5rem, 40vw);
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 16px 22px rgb(42 93 224 / 0.38)) drop-shadow(0 2px 4px rgb(0 0 0 / 0.14));
+}
+
+/* --- app bar --------------------------------------------------------------------- */
+
+.theme-dirtymac .appbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--glass);
+  border-bottom: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  backdrop-filter: blur(22px) saturate(1.6);
+}
+
+.appbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+}
+
+.appbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--md-on-surface);
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+}
+
+.appbar__brand img {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.appbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.appbar__link {
+  padding: 0.4375rem 0.8125rem;
+  border-radius: var(--md-shape-full);
+  color: var(--md-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 560;
+  text-decoration: none;
+}
+
+.appbar__link:hover {
+  background: var(--md-surface-container-high);
+  color: var(--md-on-surface);
+}
+
+@media (max-width: 40rem) {
+  .appbar__link--secondary {
+    display: none;
+  }
+}
+
+.theme-dirtymac [id] {
+  scroll-margin-top: 4.5rem;
+}
+
+.theme-dirtymac {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-dirtymac {
+    scroll-behavior: auto;
+  }
+}
+
+/* --- the desktop with the real panel ------------------------------------------------ */
+
+.desktop {
+  margin: 0;
+}
+
+.desktop__screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 30rem;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  /* One blue family, lifted from the app icon. */
+  background: radial-gradient(120% 90% at 88% 0%, rgb(155 188 255 / 0.95) 0%, transparent 60%),
+    radial-gradient(90% 80% at 0% 100%, rgb(91 124 250 / 0.9) 0%, transparent 65%),
+    linear-gradient(160deg, #6f9bff 0%, #3d63e8 48%, #2a3fb8 100%);
+  box-shadow: 0 30px 60px -28px rgb(20 40 130 / 0.65), 0 0 0 1px var(--glass-border);
+}
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 1.75rem;
+  padding-inline: 0.875rem;
+  background: var(--menubar-bg);
+  color: var(--menubar-ink);
+  font-size: 0.78125rem;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+  user-select: none;
+}
+
+.menubar__app {
+  font-weight: 700;
+}
+
+.menubar__menus {
+  white-space: pre;
+}
+
+.menubar__spacer {
+  flex: 1;
+}
+
+@media (max-width: 40rem) {
+  .menubar__menus {
+    display: none;
+  }
+}
+
+.menubar__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.menubar__item .material-symbols-outlined {
+  font-size: 1.0625rem;
+}
+
+.menubar__glyph {
+  display: inline-grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.25rem;
+  border-radius: 0.3125rem;
+  background: rgb(255 255 255 / 0.28);
+}
+
+.menubar__glyph svg {
+  width: 1.0625rem;
+  height: 1.0625rem;
+}
+
+.desktop.is-locked [data-glyph-idle],
+.desktop:not(.is-locked) [data-glyph-locked] {
+  display: none;
+}
+
+.desktop__stage {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0.375rem 0.5rem 1.5rem 1rem;
+}
+
+@media (max-width: 40rem) {
+  .desktop__stage {
+    justify-content: center;
+    padding-inline: 0.5rem;
+  }
+}
+
+.desktop figcaption {
+  margin-top: 0.875rem;
+  text-align: center;
+  color: var(--md-on-surface-variant);
+  font-size: 0.8125rem;
+}
+
+/* --- the panel, as the app draws it (MenuBarPopoverView, 300 pt wide) ---------------------- */
+
+.popover {
+  width: 18.75rem;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  background: var(--popover-bg);
+  color: var(--popover-ink);
+  box-shadow: var(--popover-ring);
+  -webkit-backdrop-filter: blur(40px) saturate(1.9);
+  backdrop-filter: blur(40px) saturate(1.9);
+}
+
+.popover__header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+}
+
+.popover__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+}
+
+.popover__title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.popover__title strong {
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+
+.popover__title span {
+  color: var(--popover-ink-2);
+  font-size: 0.6875rem;
+}
+
+.pill {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5625rem;
+  border-radius: 999px;
+  background: var(--popover-material);
+  box-shadow: inset 0 0 0 0.5px var(--popover-stroke);
+  font-size: 0.6875rem;
+  white-space: nowrap;
+}
+
+.pill__dot {
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--ok);
+}
+
+.pill__time {
+  color: var(--popover-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.popover__rule {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--popover-rule);
+}
+
+.popover__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.375rem 1.125rem;
+}
+
+.power {
+  display: grid;
+  place-items: center;
+  width: 8.25rem;
+  height: 8.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--popover-material);
+  box-shadow: inset 0 0 0 0.5px var(--popover-stroke), 0 2px 6px rgb(0 0 0 / 0.08);
+  color: var(--popover-ink);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  transition: transform 120ms ease-out, background 250ms ease, box-shadow 250ms ease, color 250ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.power .material-symbols-outlined {
+  font-size: 2.75rem;
+  font-variation-settings: "FILL" 0, "wght" 600, "GRAD" 0, "opsz" 48;
+}
+
+.power:active {
+  transform: scale(0.96);
+}
+
+.power:focus-visible {
+  outline: 3px solid var(--accent-top);
+  outline-offset: 4px;
+}
+
+.popover.is-locked .power {
+  background: linear-gradient(180deg, #ff5e54, #e3342a);
+  box-shadow: inset 0 0 0 0.5px rgb(255 59 48 / 0.6), 0 4px 14px rgb(255 59 48 / 0.35);
+  color: #fff;
+}
+
+.popover.is-locked .pill__dot {
+  background: var(--danger);
+}
+
+.popover__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3125rem;
+  text-align: center;
+}
+
+.popover__status strong {
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+
+.popover__status span {
+  color: var(--popover-ink-2);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.popover__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+}
+
+.popover__version {
+  flex: 1;
+  color: var(--popover-ink-3);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mac-btn {
+  display: inline-grid;
+  place-items: center;
+  min-height: 1.375rem;
+  padding-inline: 0.625rem;
+  border-radius: 999px;
+  background: var(--popover-material);
+  box-shadow: inset 0 0 0 0.5px var(--popover-stroke);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.mac-btn--icon {
+  width: 1.625rem;
+  padding: 0;
+}
+
+.mac-btn--icon .material-symbols-outlined {
+  font-size: 0.9375rem;
+}
+
+.mac-btn--danger {
+  color: var(--danger);
+}
+
+/* --- why + real recording ------------------------------------------------------------------ */
+
+.why {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .why {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.theme-dirtymac .why .demo {
+  padding: 0.75rem;
+  border-radius: 1.25rem;
+}
+
+.theme-dirtymac .why .demo img {
+  border-radius: 0.875rem;
+}
+
+.theme-dirtymac .footer {
+  padding-block: 2rem 2.5rem;
+}
