@@ -8,8 +8,8 @@
       name="description"
       content="Snaplock is a free, open-source KeePass password manager for Android with autofill, passkeys, 2FA codes and sync-safe saving. Your vault is a file you own."
     />
-    <meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8faf5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111412" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://erenium.tech/snaplock/" />
 
@@ -37,9 +37,33 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="theme.css" />
   </head>
-  <body>
+  <body class="theme-snaplock" id="top">
     <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="appbar">
+      <div class="wrap appbar__inner">
+        <a class="appbar__brand" href="#top">
+          <img src="../assets/snaplock-icon.svg" alt="" width="32" height="32" />
+          Snaplock
+        </a>
+        <nav class="appbar__nav" aria-label="Page sections">
+          <a class="appbar__link appbar__link--secondary" href="#features">Features</a>
+          <a class="appbar__link appbar__link--secondary" href="#privacy">Privacy</a>
+          <a
+            class="appbar__link appbar__link--secondary"
+            href="https://github.com/erenmalkoc/snaplock-v2"
+            rel="noopener"
+            >Source</a
+          >
+          <a class="btn btn--tonal" href="#install">
+            <span class="material-symbols-outlined" aria-hidden="true">download</span>
+            Install
+          </a>
+        </nav>
+      </div>
+    </header>
 
     <main id="main">
       <section class="product-hero wrap">
@@ -59,21 +83,16 @@
           </p>
 
           <div class="product-hero__actions">
+            <a class="store-badge" href="https://f-droid.org/packages/com.erenium.snaplock/" rel="noopener">
+              <img src="../assets/fdroid-get-it-on.svg" alt="Get it on F-Droid" width="646" height="250" />
+            </a>
             <a
-              class="btn btn--filled"
+              class="btn btn--filled btn--large"
               href="https://github.com/erenmalkoc/snaplock-v2/releases/latest"
               rel="noopener"
             >
               <span class="material-symbols-outlined" aria-hidden="true">download</span>
               Download APK
-            </a>
-            <a class="btn btn--outlined" href="https://github.com/erenmalkoc/snaplock-v2" rel="noopener">
-              <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-              Source
             </a>
           </div>
 
@@ -93,15 +112,33 @@
           </ul>
         </div>
 
-        <figure class="demo demo--phone">
-          <img
-            src="../assets/snaplock-entries.webp"
-            alt="Snaplock's entry list with site icons, a search field and a button for a new entry"
-            width="540"
-            height="1170"
-            loading="lazy"
-          />
-          <figcaption>Your entries, with the sites' own icons.</figcaption>
+        <figure class="stage">
+          <div class="phones">
+            <div class="phone">
+              <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="../assets/snaplock-list-dark.webp" />
+                <img
+                  src="../assets/snaplock-list-light.webp"
+                  alt="Snaplock's entry list with the sites' own icons, a search field and a button for a new entry"
+                  width="540"
+                  height="1200"
+                />
+              </picture>
+            </div>
+            <div class="phone phone--lower">
+              <picture>
+                <source media="(prefers-color-scheme: dark)" srcset="../assets/snaplock-entry-dark.webp" />
+                <img
+                  src="../assets/snaplock-entry-light.webp"
+                  alt="A login in Snaplock with its password, a live 2FA code, notes and custom fields"
+                  width="540"
+                  height="1200"
+                  loading="lazy"
+                />
+              </picture>
+            </div>
+          </div>
+          <figcaption>Your logins with their sites' icons, and a 2FA code next to the password.</figcaption>
         </figure>
       </section>
 
@@ -122,7 +159,7 @@
 
       <hr class="divider" />
 
-      <section class="section wrap" aria-labelledby="features-title">
+      <section class="section wrap" id="features" aria-labelledby="features-title">
         <h2 class="section__title" id="features-title">Features</h2>
         <p class="section__lead">Everything a password manager needs, on a file you own.</p>
 
@@ -242,7 +279,7 @@
 
       <hr class="divider" />
 
-      <section class="section wrap" aria-labelledby="install-title">
+      <section class="section wrap" id="install" aria-labelledby="install-title">
         <h2 class="section__title" id="install-title">Install</h2>
         <p class="section__lead">Android 7.0 or later. Passkeys need Android 14.</p>
 
@@ -272,36 +309,42 @@
               two without reinstalling.
             </p>
             <a
-              class="btn btn--tonal"
+              class="store-badge store-badge--small"
               href="https://f-droid.org/packages/com.erenium.snaplock/"
               rel="noopener"
             >
-              <span class="material-symbols-outlined" aria-hidden="true">download</span>
-              Get it on F-Droid
+              <img src="../assets/fdroid-get-it-on.svg" alt="Get it on F-Droid" width="646" height="250" />
             </a>
-            <p class="install__note">To check that a copy is genuine, compare its signing certificate:</p>
-            <div class="code">
-              <code>apksigner verify --print-certs snaplock.apk</code>
-              <button
-                class="icon-btn"
-                type="button"
-                data-copy="apksigner verify --print-certs snaplock.apk"
-                aria-label="Copy the verification command"
-              >
-                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
-              </button>
-            </div>
-            <p class="install__note">
-              The certificate SHA-256 must be
-              <code>e66b0d23e679d1d606573be6f705630f9f90e74be084ec4b59d1181ae608b8b7</code>.
-            </p>
           </div>
+        </div>
+
+        <div class="install__panel install__panel--wide">
+          <h3>Check that a copy is genuine</h3>
+          <p>
+            The GitHub and F-Droid builds carry the same signature. Compare the signing certificate
+            of the APK you installed or downloaded:
+          </p>
+          <div class="code">
+            <code>apksigner verify --print-certs snaplock.apk</code>
+            <button
+              class="icon-btn"
+              type="button"
+              data-copy="apksigner verify --print-certs snaplock.apk"
+              aria-label="Copy the verification command"
+            >
+              <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+            </button>
+          </div>
+          <p class="install__note">
+            The certificate SHA-256 must be
+            <code>e66b0d23e679d1d606573be6f705630f9f90e74be084ec4b59d1181ae608b8b7</code>.
+          </p>
         </div>
       </section>
 
       <hr class="divider" />
 
-      <section class="section wrap" aria-labelledby="privacy-title">
+      <section class="section wrap" id="privacy" aria-labelledby="privacy-title">
         <h2 class="section__title" id="privacy-title">Privacy</h2>
         <div class="prose">
           <p>
@@ -325,6 +368,11 @@
         </a>
         <a href="https://github.com/erenmalkoc/snaplock-v2/issues" rel="noopener">Report an issue</a>
       </div>
+      <p class="wrap footer__credit">
+        The “Get it on F-Droid” badge is by
+        <a href="https://f-droid.org/en/docs/Badges/" rel="noopener">F-Droid</a>, licensed
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="noopener">CC BY-SA 3.0</a>.
+      </p>
     </footer>
 
     <div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
