@@ -155,6 +155,18 @@
   }
 }
 
+/* A grid track must be allowed to shrink below its content, or a wide command
+   or caption pushes the whole page sideways on a phone. */
+.theme-snaplock .product-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 52rem) {
+  .theme-snaplock .product-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  }
+}
+
 /* --- hero --------------------------------------------------------------- */
 
 .theme-snaplock .product-hero {
