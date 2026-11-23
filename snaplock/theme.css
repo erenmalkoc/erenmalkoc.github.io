@@ -203,12 +203,16 @@
 
 /* The official F-Droid badge sits on a 646 x 250 canvas with a 41 px
    transparent margin around 564 x 168 of artwork. --badge-h is the height of
-   the artwork, the image is scaled to match and the margin is pulled in. */
+   the artwork, the image is scaled to match and the margin is pulled in.
+   The crop's corners must be the badge's own: its outline is a 4 unit stroke
+   on a 20 unit radius, so the outer edge is a 22 unit radius on 168 units of
+   height. A rounder crop (it was a flat 0.75rem) cuts the corners of the grey
+   outline and lets the black fill show past it. */
 .store-badge {
   --badge-h: 3.5rem;
   display: inline-block;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: calc(var(--badge-h) * 0.131);
   line-height: 0;
 }
 
