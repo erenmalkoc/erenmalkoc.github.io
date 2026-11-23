@@ -130,68 +130,204 @@
           </ul>
         </div>
 
-        <figure class="desktop">
+        <figure class="desktop" data-desktop>
           <div class="desktop__screen">
-            <div class="menubar" aria-hidden="true">
-              <span class="menubar__app">Finder</span>
-              <span class="menubar__menus">File &nbsp;&nbsp; Edit &nbsp;&nbsp; View &nbsp;&nbsp; Go &nbsp;&nbsp; Window &nbsp;&nbsp; Help</span>
+            <div class="menubar">
+              <span class="menubar__app" aria-hidden="true">Finder</span>
+              <span class="menubar__menus" aria-hidden="true">File &nbsp;&nbsp; Edit &nbsp;&nbsp; View &nbsp;&nbsp; Go &nbsp;&nbsp; Window &nbsp;&nbsp; Help</span>
               <span class="menubar__spacer"></span>
-              <span class="menubar__item"><span class="material-symbols-outlined">wifi</span></span>
-              <span class="menubar__item"><span class="material-symbols-outlined">battery_full</span></span>
-              <span class="menubar__glyph">
-                <svg data-glyph-idle viewBox="0 0 24 24">
+              <span class="menubar__item" aria-hidden="true"><span class="sym sym--wifi"></span></span>
+              <span class="menubar__item" aria-hidden="true"><span class="sym sym--battery"></span></span>
+              <button class="menubar__glyph" type="button" data-glyph aria-label="dirtymac" aria-expanded="true" aria-controls="dirtymac-panel">
+                <svg data-glyph-idle viewBox="0 0 24 24" aria-hidden="true">
                   <rect x="3.5" y="3.5" width="17" height="17.5" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.8" />
                   <path d="M10 19 L15.4 6.5 L18 6.5 L12.6 19 Z" fill="currentColor" />
                   <circle cx="7.4" cy="9" r="1" fill="currentColor" />
                   <circle cx="7" cy="13.6" r="0.9" fill="currentColor" />
                 </svg>
-                <svg data-glyph-locked viewBox="0 0 24 24">
+                <svg data-glyph-locked viewBox="0 0 24 24" aria-hidden="true">
                   <rect x="3.5" y="3.5" width="17" height="17.5" rx="4.5" fill="#E5484D" />
                   <path d="M10 19 L15.4 6.5 L18 6.5 L12.6 19 Z" fill="#FFFFFF" />
                 </svg>
                 <span class="menubar__title" data-menubar-title hidden>00:00</span>
-              </span>
-              <span class="menubar__item">9:41</span>
+              </button>
+              <span class="menubar__item" aria-hidden="true">9:41</span>
             </div>
 
             <div class="desktop__stage">
-              <div class="popover" data-popover role="group" aria-label="dirtymac menu bar panel, interactive preview">
-                <div class="popover__header">
-                  <img class="popover__icon" src="../assets/dirtymac-icon-352.webp" alt="" width="36" height="36" />
-                  <div class="popover__title">
-                    <strong>dirtymac</strong>
-                    <span>Keyboard utility</span>
-                  </div>
-                  <div class="pill">
-                    <span class="pill__dot"></span>
-                    <span data-pill-label>Ready</span>
-                    <span class="pill__time" data-pill-time hidden>00:00</span>
-                  </div>
-                </div>
-                <hr class="popover__rule" />
-                <div class="popover__body">
-                  <button class="power" type="button" data-power aria-pressed="false" aria-label="Lock Keyboard">
-                    <span class="power__glyph" aria-hidden="true"></span>
-                  </button>
-                  <div class="popover__status">
-                    <strong data-headline>Click to Lock Keyboard</strong>
-                    <span data-caption>Mouse and trackpad stay enabled.</span>
-                    <div class="hold" data-hold hidden>
-                      <div class="hold__bar" aria-hidden="true"><div class="hold__track"><span data-hold-fill></span></div></div>
-                      <span class="hold__text" data-hold-text aria-live="polite">Hold Esc for 3 seconds to unlock.</span>
+              <div class="popover" id="dirtymac-panel" data-popover data-state="idle" data-scheme="system" role="group" aria-label="dirtymac menu bar panel, interactive preview">
+
+                <!-- The panel: MainView -->
+                <section class="view" data-view-main>
+                  <div class="popover__header">
+                    <img class="popover__icon" src="../assets/dirtymac-icon-352.webp" alt="" width="36" height="36" />
+                    <div class="popover__title">
+                      <strong>dirtymac</strong>
+                      <span data-t="Keyboard utility">Keyboard utility</span>
+                    </div>
+                    <div class="pill">
+                      <span class="pill__dot"></span>
+                      <span data-pill-label>Ready</span>
+                      <span class="pill__time" data-pill-time hidden>00:00</span>
                     </div>
                   </div>
-                </div>
-                <hr class="popover__rule" />
-                <div class="popover__footer" aria-hidden="true">
-                  <span class="mac-btn mac-btn--icon"><span class="gear" aria-hidden="true"></span></span>
-                  <span class="popover__version">v1.4.0</span>
-                  <span class="mac-btn mac-btn--quit">Quit</span>
-                </div>
+                  <hr class="popover__rule" />
+
+                  <div class="popover__body" data-body-main>
+                    <button class="power" type="button" data-power aria-pressed="false" aria-label="Lock Keyboard">
+                      <span class="power__glyph" aria-hidden="true"></span>
+                    </button>
+                    <div class="status">
+                      <!-- ready and waiting share a cell, so the panel is as tall as the larger -->
+                      <div class="status__ready">
+                        <div class="status__stack" data-status-idle>
+                          <strong data-t="Click to Lock Keyboard">Click to Lock Keyboard</strong>
+                          <span data-caption>Mouse and trackpad stay enabled.</span>
+                        </div>
+                        <div class="status__stack status__wait" data-status-wait>
+                          <strong data-wait-text aria-live="polite">Locking in 5…</strong>
+                          <button class="mac-btn mac-btn--mini" type="button" data-wait-cancel data-t="Cancel">Cancel</button>
+                        </div>
+                      </div>
+                      <div class="status__stack" data-status-active>
+                        <strong data-t="Cleaning Mode Active">Cleaning Mode Active</strong>
+                        <div class="unlocks" data-unlocks hidden>
+                          <span class="sym sym--timer" aria-hidden="true"></span>
+                          <span data-unlocks-text>Unlocks in 01:00</span>
+                        </div>
+                        <div class="hold" data-hold>
+                          <div class="hold__bar" aria-hidden="true"><div class="hold__track"><span data-hold-fill></span></div></div>
+                          <span class="hold__text" data-hold-text aria-live="polite">Hold Esc for 3 seconds to unlock.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Full lockdown confirmation (the mouse would be frozen) -->
+                  <div class="popover__body popover__body--confirm" data-body-confirm>
+                    <span class="sym sym--warning-large" aria-hidden="true"></span>
+                    <div class="confirm__text">
+                      <strong data-t="Full Lockdown">Full Lockdown</strong>
+                      <p data-t="Your mouse and trackpad will be frozen too. To unlock: hold Esc for 3 seconds, or wait for the auto-unlock timer.">Your mouse and trackpad will be frozen too.</p>
+                      <p class="confirm__duration" data-confirm-duration></p>
+                    </div>
+                    <div class="esc-check" data-esc-check hidden>
+                      <div class="esc-check__progress" data-esc-progress>
+                        <div class="hold__bar" aria-hidden="true"><div class="hold__track"><span data-esc-fill></span></div></div>
+                        <span class="esc-check__text" data-t="Hold Esc for 3 seconds to check that your way out works.">Hold Esc for 3 seconds to check that your way out works.</span>
+                      </div>
+                      <p class="esc-check__done" data-esc-done hidden aria-live="polite">
+                        <span class="sym sym--check" aria-hidden="true"></span>
+                        <span data-t="Esc works. You can lock now.">Esc works. You can lock now.</span>
+                      </p>
+                    </div>
+                    <div class="confirm__buttons">
+                      <button class="mac-btn mac-btn--regular" type="button" data-confirm-cancel data-t="Cancel">Cancel</button>
+                      <button class="mac-btn mac-btn--regular mac-btn--prominent" type="button" data-confirm-lock data-t="Lock Keyboard">Lock Keyboard</button>
+                    </div>
+                  </div>
+
+                  <hr class="popover__rule" />
+                  <div class="popover__footer">
+                    <button class="mac-btn mac-btn--icon" type="button" data-open-settings aria-label="Settings"><span class="gear" aria-hidden="true"></span></button>
+                    <span class="popover__version">v1.4.0</span>
+                    <button class="mac-btn" type="button" data-quit data-t="Quit">Quit</button>
+                  </div>
+                </section>
+
+                <!-- Settings: SettingsView -->
+                <section class="view settings" data-view-settings hidden>
+                  <div class="settings__header">
+                    <button class="settings__back" type="button" data-back aria-label="Back"><span class="sym sym--back" aria-hidden="true"></span></button>
+                    <strong data-t="Settings">Settings</strong>
+                  </div>
+                  <hr class="popover__rule" />
+                  <div class="settings__scroll" tabindex="0">
+                    <div class="settings__content">
+
+                      <div class="sgroup">
+                        <h3 data-t="Mode">Mode</h3>
+                        <div class="seg" role="radiogroup" aria-label="Mode" data-seg="mode">
+                          <button type="button" role="radio" data-value="basic" data-t="Basic">Basic</button>
+                          <button type="button" role="radio" data-value="advanced" data-t="Advanced">Advanced</button>
+                        </div>
+                        <div class="advanced" data-advanced hidden>
+                          <div class="row"><span id="l-mod" data-t="Block modifier keys">Block modifier keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-mod" data-switch="blockModifierKeys"></button></div>
+                          <div class="row"><span id="l-media" data-t="Block media & brightness keys">Block media &amp; brightness keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-media" data-switch="blockMediaKeys"></button></div>
+                          <div class="row"><span id="l-mouse" data-t="Block mouse & trackpad">Block mouse &amp; trackpad</span><button class="switch" type="button" role="switch" aria-labelledby="l-mouse" data-switch="blockMouseAndTrackpad"></button></div>
+                          <div class="row row--between"><span id="l-auto" data-t="Auto-unlock">Auto-unlock</span><span class="popup popup--small"><select aria-labelledby="l-auto" data-select="autoUnlockSeconds"></select></span></div>
+                          <p class="note note--warning" data-frozen-warning hidden><span class="sym sym--warning" aria-hidden="true"></span><span data-t="Mouse will be frozen. Hold Esc for 3s to force unlock.">Mouse will be frozen. Hold Esc for 3s to force unlock.</span></p>
+                          <p class="note" data-frozen-note hidden></p>
+                        </div>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Before locking">Before locking</h3>
+                        <div class="row row--between"><span id="l-delay" data-t="Start delay">Start delay</span><span class="popup"><select aria-labelledby="l-delay" data-select="startDelaySeconds"></select></span></div>
+                        <p class="note" data-t="Waits a few seconds after you click Lock, so you can take your hands off the keyboard. Cancel stops it.">Waits a few seconds after you click Lock.</p>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="While locked">While locked</h3>
+                        <div class="row"><span id="l-awake" data-t="Keep the screen awake">Keep the screen awake</span><button class="switch" type="button" role="switch" aria-labelledby="l-awake" data-switch="keepDisplayAwake"></button></div>
+                        <p class="note" data-t="Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.">Stops the screen from dimming.</p>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Sound">Sound</h3>
+                        <div class="row"><span id="l-sound" data-t="Play sounds">Play sounds</span><button class="switch" type="button" role="switch" aria-labelledby="l-sound" data-switch="playSounds"></button></div>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Appearance">Appearance</h3>
+                        <div class="seg seg--three" role="radiogroup" aria-label="Appearance" data-seg="appearance">
+                          <button type="button" role="radio" data-value="system" data-t="System">System</button>
+                          <button type="button" role="radio" data-value="light" data-t="Light">Light</button>
+                          <button type="button" role="radio" data-value="dark" data-t="Dark">Dark</button>
+                        </div>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Language">Language</h3>
+                        <span class="popup popup--wide"><select aria-label="Language" data-select="language"></select></span>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Quick Access">Quick Access</h3>
+                        <div class="row row--between"><span id="l-hotkey" data-t="Global shortcut">Global shortcut</span><span class="popup popup--small-wide"><select aria-labelledby="l-hotkey" data-select="hotKey"></select></span></div>
+                        <div class="row"><span id="l-login" data-t="Open at login">Open at login</span><button class="switch" type="button" role="switch" aria-labelledby="l-login" data-switch="openAtLogin"></button></div>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Updates">Updates</h3>
+                        <div class="row"><span id="l-updates" data-t="Check for updates">Check for updates</span><button class="switch" type="button" role="switch" aria-labelledby="l-updates" data-switch="updateChecks"></button></div>
+                        <p class="note" data-t="dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address.">dirtymac takes your privacy seriously.</p>
+                        <div class="row row--check" data-check-row hidden>
+                          <button class="mac-btn" type="button" data-check-now data-t="Check now">Check now</button>
+                          <span class="note note--inline" data-check-status aria-live="polite"></span>
+                        </div>
+                      </div>
+
+                      <div class="sgroup">
+                        <h3 data-t="Help">Help</h3>
+                        <div class="row row--buttons">
+                          <a class="mac-btn" href="#install" data-t="Show Welcome Screen">Show Welcome Screen</a>
+                          <a class="mac-btn" href="https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.0" rel="noopener" data-t="What's New">What's New</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <hr class="popover__rule" />
+                  <div class="popover__footer">
+                    <span class="popover__version">v1.4.0</span>
+                  </div>
+                </section>
+
               </div>
             </div>
           </div>
-          <figcaption>Try it: click the power button, then hold Esc for three seconds to release.</figcaption>
+          <figcaption>This is the app's own panel, rebuilt for the page: change the settings, lock it, hold Esc for three seconds to release. Nothing here touches your keyboard.</figcaption>
         </figure>
       </section>
 
