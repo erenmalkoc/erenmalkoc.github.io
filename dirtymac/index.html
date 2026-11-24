@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="theme.css" />
   </head>
   <body class="theme-dirtymac" id="top">
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
     <header class="appbar">
       <div class="wrap appbar__inner">
@@ -48,18 +48,22 @@
           <img src="../assets/dirtymac-icon-352.webp" alt="" width="28" height="28" />
           dirtymac
         </a>
-        <nav class="appbar__nav" aria-label="Page sections">
-          <a class="appbar__link appbar__link--secondary" href="#features">Features</a>
-          <a class="appbar__link appbar__link--secondary" href="#permissions">Permissions</a>
+        <nav class="appbar__nav" aria-label="Page sections" data-i18n-aria-label="nav.aria">
+          <a class="appbar__link appbar__link--secondary" href="#features" data-i18n="nav.features">Features</a>
+          <a class="appbar__link appbar__link--secondary" href="#permissions" data-i18n="nav.permissions">Permissions</a>
           <a
             class="appbar__link appbar__link--secondary"
             href="https://github.com/erenmalkoc/dirtymac"
             rel="noopener"
-            >Source</a
+             data-i18n="nav.source">Source</a
           >
+          <label class="langpick">
+            <span class="material-symbols-outlined" aria-hidden="true">translate</span>
+            <select data-lang-select aria-label="Language" data-i18n-aria-label="lang.aria"></select>
+          </label>
           <a class="btn btn--tonal" href="#install">
             <span class="material-symbols-outlined" aria-hidden="true">download</span>
-            Install
+            <span data-i18n="nav.install">Install</span>
           </a>
         </nav>
       </div>
@@ -73,12 +77,12 @@
             src="../assets/dirtymac-icon-352.webp"
             srcset="../assets/dirtymac-icon-352.webp 352w, ../assets/dirtymac-icon-512.webp 512w"
             sizes="min(11rem, 42vw)"
-            alt="dirtymac app icon"
+            alt="dirtymac app icon" data-i18n-alt="hero.icon.alt"
             width="352"
             height="352"
           />
           <h1 class="product-hero__title">dirtymac</h1>
-          <p class="product-hero__tagline">
+          <p class="product-hero__tagline" data-i18n="hero.tagline">
             A native macOS menu bar utility that temporarily locks your keyboard so you can clean it
             without triggering keys. The cursor keeps moving, and a palm on the trackpad scrolls and
             clicks nothing.
@@ -90,7 +94,7 @@
               class="icon-btn"
               type="button"
               data-copy="brew install --cask erenmalkoc/tap/dirtymac"
-              aria-label="Copy the install command"
+              aria-label="Copy the install command" data-i18n-aria-label="copy.install"
             >
               <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
             </button>
@@ -103,7 +107,7 @@
               rel="noopener"
             >
               <span class="material-symbols-outlined" aria-hidden="true">download</span>
-              Download DMG
+              <span data-i18n="hero.download">Download DMG</span>
             </a>
             <a class="btn btn--outlined" href="https://github.com/erenmalkoc/dirtymac" rel="noopener">
               <svg class="btn__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -111,22 +115,22 @@
                   d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
                 />
               </svg>
-              Source
+              <span data-i18n="hero.source">Source</span>
             </a>
           </div>
 
           <ul class="badges">
             <li>
               <span class="material-symbols-outlined" aria-hidden="true">laptop_mac</span>
-              macOS 14 or later
+              <span data-i18n="badge.macos">macOS 14 or later</span>
             </li>
             <li>
               <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
-              Offline by default
+              <span data-i18n="badge.offline">Offline by default</span>
             </li>
             <li>
               <span class="material-symbols-outlined" aria-hidden="true">balance</span>
-              MIT licensed
+              <span data-i18n="badge.license">MIT licensed</span>
             </li>
           </ul>
         </div>
@@ -156,7 +160,7 @@
             </div>
 
             <div class="desktop__stage">
-              <div class="popover" id="dirtymac-panel" data-popover data-state="idle" data-scheme="system" role="group" aria-label="dirtymac menu bar panel, interactive preview">
+              <div class="popover" id="dirtymac-panel" data-popover data-state="idle" data-scheme="system" role="group" aria-label="dirtymac menu bar panel, interactive preview" data-i18n-aria-label="demo.aria">
 
                 <!-- The panel: MainView -->
                 <section class="view" data-view-main>
@@ -305,8 +309,8 @@
 
                       <div class="sgroup">
                         <h3 data-t="Quick Access">Quick Access</h3>
-                        <div class="row row--between"><span id="l-hotkey" data-t="Global shortcut">Global shortcut</span><span class="popup popup--small-wide"><select aria-labelledby="l-hotkey" data-select="hotKey"></select></span></div>
-                        <div class="row"><span id="l-login" data-t="Open at login">Open at login</span><button class="switch" type="button" role="switch" aria-labelledby="l-login" data-switch="openAtLogin"></button></div>
+                        <div class="row row--between"><span id="l-hotkey" data-t="Global shortcut" data-i18n="f.shortcut.title">Global shortcut</span><span class="popup popup--small-wide"><select aria-labelledby="l-hotkey" data-select="hotKey"></select></span></div>
+                        <div class="row"><span id="l-login" data-t="Open at login" data-i18n="f.login.title">Open at login</span><button class="switch" type="button" role="switch" aria-labelledby="l-login" data-switch="openAtLogin"></button></div>
                       </div>
 
                       <div class="sgroup">
@@ -338,7 +342,7 @@
               </div>
             </div>
           </div>
-          <figcaption>This is the app's own panel, rebuilt for the page: change the settings, lock it, hold Esc for three seconds to release. Nothing here touches your keyboard.</figcaption>
+          <figcaption data-i18n="demo.caption">This is the app's own panel, rebuilt for the page: change the settings, lock it, hold Esc for three seconds to release. Nothing here touches your keyboard.</figcaption>
         </figure>
       </section>
 
@@ -347,9 +351,9 @@
       <section class="section wrap" id="why" aria-labelledby="why-title">
         <div class="why">
           <div>
-            <h2 class="section__title" id="why-title">Why</h2>
+            <h2 class="section__title" id="why-title" data-i18n="why.title">Why</h2>
             <div class="prose">
-              <p>
+              <p data-i18n="why.text">
                 Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window full
                 of garbage characters and accidentally launching apps. dirtymac suppresses every
                 keystroke at the system event-tap level until you click stop. The cursor keeps moving the
@@ -360,12 +364,12 @@
           <figure class="demo">
             <img
             src="../assets/dirtymac-demo.gif"
-            alt="dirtymac locking the keyboard from the macOS menu bar"
+            alt="dirtymac locking the keyboard from the macOS menu bar" data-i18n-alt="why.alt"
             width="462"
             height="400"
             loading="lazy"
           />
-            <figcaption>Lock from the menu bar, wipe the keys, click once to release.</figcaption>
+            <figcaption data-i18n="why.caption">Lock from the menu bar, wipe the keys, click once to release.</figcaption>
           </figure>
         </div>
       </section>
@@ -373,22 +377,22 @@
       <hr class="divider" />
 
       <section class="section wrap" id="features" aria-labelledby="features-title">
-        <h2 class="section__title" id="features-title">Features</h2>
-        <p class="section__lead">Small utility, but thorough about the edge cases.</p>
+        <h2 class="section__title" id="features-title" data-i18n="features.title">Features</h2>
+        <p class="section__lead" data-i18n="features.lead">Small utility, but thorough about the edge cases.</p>
 
         <ul class="features">
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">lock</span>
             <div>
-              <h3>One-click lock</h3>
-              <p>Lock and release straight from the menu bar — no window, no Dock icon.</p>
+              <h3 data-i18n="f.lock.title">One-click lock</h3>
+              <p data-i18n="f.lock.text">Lock and release straight from the menu bar — no window, no Dock icon.</p>
             </div>
           </li>
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">keyboard_command_key</span>
             <div>
               <h3>Global shortcut</h3>
-              <p>
+              <p data-i18n="f.shortcut.text">
                 Open the menu bar panel from any app with ⌃⌥⌘K — change it or turn it off in
                 Settings.
               </p>
@@ -397,8 +401,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">search</span>
             <div>
-              <h3>Spotlight and Shortcuts</h3>
-              <p>
+              <h3 data-i18n="f.spotlight.title">Spotlight and Shortcuts</h3>
+              <p data-i18n="f.spotlight.text">
                 Lock the keyboard or open the panel from Spotlight or the Shortcuts app — even when
                 dirtymac isn't running.
               </p>
@@ -407,8 +411,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">keyboard</span>
             <div>
-              <h3>Every key, not just letters</h3>
-              <p>
+              <h3 data-i18n="f.keys.title">Every key, not just letters</h3>
+              <p data-i18n="f.keys.text">
                 Regular keys, modifiers, and the brightness, volume, media and F-key controls are
                 all blocked.
               </p>
@@ -417,8 +421,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">mouse</span>
             <div>
-              <h3>Basic mode</h3>
-              <p>
+              <h3 data-i18n="f.basic.title">Basic mode</h3>
+              <p data-i18n="f.basic.text">
                 The cursor stays live and so does the menu bar icon: click it to release the lock.
                 Scrolling, gestures and clicks elsewhere are ignored, and the trackpad's system swipes
                 are switched off for the lock and put back after.
@@ -428,8 +432,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">tune</span>
             <div>
-              <h3>Advanced mode</h3>
-              <p>
+              <h3 data-i18n="f.advanced.title">Advanced mode</h3>
+              <p data-i18n="f.advanced.text">
                 Optionally freeze the mouse, trackpad and gestures too, pick which key classes to
                 block, and set an auto-unlock timer.
               </p>
@@ -438,8 +442,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">exit_to_app</span>
             <div>
-              <h3>Always a way out</h3>
-              <p>
+              <h3 data-i18n="f.exit.title">Always a way out</h3>
+              <p data-i18n="f.exit.text">
                 Hold Esc for three seconds to release — works even in full lockdown, and finishes
                 when you let go so no stray Esc reaches your app.
               </p>
@@ -448,8 +452,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">shield</span>
             <div>
-              <h3>Honest about Secure Input</h3>
-              <p>
+              <h3 data-i18n="f.secure.title">Honest about Secure Input</h3>
+              <p data-i18n="f.secure.text">
                 When a password field or Terminal's Secure Keyboard Entry stops macOS from letting
                 any app block keys, dirtymac says so instead of pretending.
               </p>
@@ -458,15 +462,15 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">bedtime</span>
             <div>
-              <h3>Ends with your session</h3>
-              <p>The lock lets go when your Mac sleeps, the screen locks or users switch.</p>
+              <h3 data-i18n="f.session.title">Ends with your session</h3>
+              <p data-i18n="f.session.text">The lock lets go when your Mac sleeps, the screen locks or users switch.</p>
             </div>
           </li>
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">volume_up</span>
             <div>
-              <h3>Sound cues</h3>
-              <p>
+              <h3 data-i18n="f.sound.title">Sound cues</h3>
+              <p data-i18n="f.sound.text">
                 A short sound when the keyboard locks, while you hold Esc and before it unlocks —
                 easy to turn off.
               </p>
@@ -475,8 +479,8 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">checklist</span>
             <div>
-              <h3>Guided first launch</h3>
-              <p>
+              <h3 data-i18n="f.onboarding.title">Guided first launch</h3>
+              <p data-i18n="f.onboarding.text">
                 Three-step onboarding with live Accessibility-permission status, plus a one-time
                 What's New after each update.
               </p>
@@ -486,7 +490,7 @@
             <span class="material-symbols-outlined" aria-hidden="true">login</span>
             <div>
               <h3>Open at login</h3>
-              <p>
+              <p data-i18n="f.login.text">
                 Start dirtymac with your Mac — offered during onboarding, changeable any time in
                 Settings.
               </p>
@@ -495,25 +499,24 @@
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">timer</span>
             <div>
-              <h3>Live status</h3>
-              <p>
-                Elapsed time and auto-unlock countdown while locked; the event tap re-enables itself
-                if macOS times it out.
+              <h3 data-i18n="f.status.title">Live status</h3>
+              <p data-i18n="f.status.text">
+                Elapsed time and auto-unlock countdown while locked. The event tap re-enables itself if macOS times it out.
               </p>
             </div>
           </li>
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">translate</span>
             <div>
-              <h3>17 languages</h3>
-              <p>Runtime language switching and a light / dark override — no relaunch needed.</p>
+              <h3 data-i18n="f.languages.title">17 languages</h3>
+              <p data-i18n="f.languages.text">Runtime language switching and a light / dark override — no relaunch needed.</p>
             </div>
           </li>
           <li class="feature">
             <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
             <div>
-              <h3>Nothing leaves your Mac</h3>
-              <p>No network access unless you turn on update checks, no analytics, no background daemons.</p>
+              <h3 data-i18n="f.offline.title">Nothing leaves your Mac</h3>
+              <p data-i18n="f.offline.text">No network access unless you turn on update checks, no analytics, no background daemons.</p>
             </div>
           </li>
         </ul>
@@ -522,25 +525,25 @@
       <hr class="divider" />
 
       <section class="section wrap" id="install" aria-labelledby="install-title">
-        <h2 class="section__title" id="install-title">Install</h2>
-        <p class="section__lead">macOS 14 (Sonoma) or later.</p>
+        <h2 class="section__title" id="install-title" data-i18n="install.title">Install</h2>
+        <p class="section__lead" data-i18n="install.lead">macOS 14 (Sonoma) or later.</p>
 
         <div class="install">
           <div class="install__panel">
-            <h3>Homebrew (recommended)</h3>
-            <p>The cask is signed and notarized, and upgrades come through <code>brew</code>.</p>
+            <h3 data-i18n="brew.title">Homebrew (recommended)</h3>
+            <p data-i18n="brew.text" data-i18n-html>The cask is signed and notarized, and upgrades come through <code>brew</code>.</p>
             <div class="code">
               <code>brew install --cask erenmalkoc/tap/dirtymac</code>
               <button
                 class="icon-btn"
                 type="button"
                 data-copy="brew install --cask erenmalkoc/tap/dirtymac"
-                aria-label="Copy the install command"
+                aria-label="Copy the install command" data-i18n-aria-label="copy.install"
               >
                 <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
               </button>
             </div>
-            <p class="install__note">
+            <p class="install__note" data-i18n="brew.note" data-i18n-html>
               Homebrew 6.0 and later require third-party taps to be trusted first. If you see
               <code>Refusing to load cask … from untrusted tap</code>, trust the tap once and retry:
             </p>
@@ -550,7 +553,7 @@
                 class="icon-btn"
                 type="button"
                 data-copy="brew trust erenmalkoc/tap"
-                aria-label="Copy the trust command"
+                aria-label="Copy the trust command" data-i18n-aria-label="copy.trust"
               >
                 <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
               </button>
@@ -558,8 +561,8 @@
           </div>
 
           <div class="install__panel">
-            <h3>Manual download</h3>
-            <p>
+            <h3 data-i18n="manual.title">Manual download</h3>
+            <p data-i18n="manual.text" data-i18n-html>
               Grab the latest signed and notarized DMG, then drag <code>dirtymac.app</code> into
               <code>/Applications</code>.
             </p>
@@ -569,9 +572,9 @@
               rel="noopener"
             >
               <span class="material-symbols-outlined" aria-hidden="true">download</span>
-              Latest release
+              <span data-i18n="manual.button">Latest release</span>
             </a>
-            <p class="install__note">
+            <p class="install__note" data-i18n="manual.note">
               Both the app and the DMG carry their own stapled notarization ticket from 1.1.2 on, so
               the installed copy verifies with no network at all. To check your copy:
             </p>
@@ -581,7 +584,7 @@
                 class="icon-btn"
                 type="button"
                 data-copy="xcrun stapler validate /Applications/dirtymac.app"
-                aria-label="Copy the validation command"
+                aria-label="Copy the validation command" data-i18n-aria-label="copy.validate"
               >
                 <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
               </button>
@@ -593,25 +596,25 @@
       <hr class="divider" />
 
       <section class="section wrap" id="permissions" aria-labelledby="permissions-title">
-        <h2 class="section__title" id="permissions-title">Permissions</h2>
+        <h2 class="section__title" id="permissions-title" data-i18n="permissions.title">Permissions</h2>
         <div class="prose">
-          <p>
+          <p data-i18n="permissions.p1" data-i18n-html>
             dirtymac needs <strong>Accessibility</strong> access to intercept keyboard events. On
-            first launch, click the menu bar icon and choose <strong>Grant Access</strong>; macOS
+            first launch, click the menu bar icon and choose <strong>Grant Access</strong>. macOS
             then prompts you to enable dirtymac in
             <strong>System Settings → Privacy &amp; Security → Accessibility</strong>. Toggle it on
             and reopen the popover.
           </p>
-          <p>The accessibility tap only swallows events — nothing is recorded, logged or forwarded.</p>
+          <p data-i18n="permissions.p2">The accessibility tap only swallows events — nothing is recorded, logged or forwarded.</p>
         </div>
       </section>
 
       <hr class="divider" />
 
       <section class="section wrap" aria-labelledby="how-title">
-        <h2 class="section__title" id="how-title">How it works</h2>
+        <h2 class="section__title" id="how-title" data-i18n="how.title">How it works</h2>
         <div class="prose">
-          <p>
+          <p data-i18n="how.p1" data-i18n-html>
             dirtymac creates a <code>CGEventTap</code> at the session level. The event mask is built
             from the active lock configuration: <code>keyDown</code> and <code>keyUp</code> are
             always present, while <code>flagsChanged</code>, the aux-control channel behind
@@ -621,7 +624,7 @@
             session. The callback returns nothing for blocked events, removing them from the system
             input queue.
           </p>
-          <p>
+          <p data-i18n="how.p2">
             In Basic mode plain mouse movement is not in the mask, so the cursor keeps moving. Clicks,
             drags, scrolling and gestures are, behind a guard that lets a press through only when it
             goes down over one of dirtymac's own windows, which keeps the click that opens the menu
@@ -630,7 +633,7 @@
             be released. If macOS disables the tap after a timeout, dirtymac re-enables it
             automatically.
           </p>
-          <p>
+          <p data-i18n="how.p3">
             On macOS 27 trackpad scrolling reaches apps without passing any event tap, and the system
             swipes (Mission Control, Spaces) are handled by the Dock. So during a lock dirtymac also
             covers every screen with a nearly invisible window of its own, below the menu bar, that
@@ -645,15 +648,15 @@
       <hr class="divider" />
 
       <section class="section wrap" aria-labelledby="privacy-title">
-        <h2 class="section__title" id="privacy-title">Privacy</h2>
+        <h2 class="section__title" id="privacy-title" data-i18n="privacy.title">Privacy</h2>
         <div class="prose">
-          <p>
+          <p data-i18n="privacy.text">
             dirtymac runs entirely on your Mac. It makes no network connections unless you turn on
             Settings → Updates → Check for updates, which is off by default. Then, once a day, it asks
             GitHub for the number of the latest release and nothing else: no identifier, cookie or
             usage data is sent, and GitHub can see your IP address like any website you visit. There
             is no telemetry, analytics or crash reporting, and no background process — quitting the
-            app fully releases the keyboard. The hardened runtime is enabled; the app is unsandboxed
+            app fully releases the keyboard. The hardened runtime is enabled. The app is unsandboxed
             because the system event tap requires it.
           </p>
         </div>
@@ -668,12 +671,13 @@
           <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
           erenium.tech
         </a>
-        <a href="https://github.com/erenmalkoc/dirtymac/issues" rel="noopener">Report an issue</a>
+        <a href="https://github.com/erenmalkoc/dirtymac/issues" rel="noopener" data-i18n="footer.issue">Report an issue</a>
       </div>
     </footer>
 
     <div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
 
+    <script src="i18n.js"></script>
     <script src="../main.js"></script>
     <script src="popover.js" defer></script>
   </body>

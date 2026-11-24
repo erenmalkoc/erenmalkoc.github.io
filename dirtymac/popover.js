@@ -61,6 +61,8 @@
   // -v2: the first version stored "System" as the language, which made the demo open in the
   // visitor's browser language. Starting over puts everyone on English.
   var STORAGE_KEY = "dirtymac-demo-settings-v2";
+  // The page's language picker and this panel's share one language (see i18n.js).
+  var SHARED_LANGUAGE_KEY = "dirtymac-language";
   var cfg = load();
 
   function load() {
@@ -73,7 +75,12 @@
     if (!(out.hotKey in HOT_KEYS)) out.hotKey = DEFAULTS.hotKey;
     if (["basic", "advanced"].indexOf(out.mode) < 0) out.mode = "basic";
     if (["system", "light", "dark"].indexOf(out.appearance) < 0) out.appearance = "system";
-    if (out.language !== "system" && LANGUAGES.indexOf(out.language) < 0) out.language = "system";
+    if (out.language !== "system" && LANGUAGES.indexOf(out.language) < 0) out.language = "en";
+    // The language the visitor picked on the page, or in the panel earlier, wins.
+    try {
+      var shared = window.localStorage.getItem(SHARED_LANGUAGE_KEY);
+      if (LANGUAGES.indexOf(shared) >= 0) out.language = shared;
+    } catch (e) { /* private mode */ }
     out.autoUnlockSeconds = clampedSeconds(AUTO_UNLOCK_CHOICES.indexOf(out.autoUnlockSeconds) < 0 ? 0 : out.autoUnlockSeconds, out.mode === "advanced" && out.blockMouseAndTrackpad);
     if (START_DELAY_CHOICES.indexOf(out.startDelaySeconds) < 0) out.startDelaySeconds = 0;
     return out;
@@ -597,7 +604,21 @@
       if (key === "autoUnlockSeconds") cfg[key] = clampedSeconds(cfg[key], effective(cfg).blockMouseAndTrackpad);
       save();
       renderAll();
+      if (key === "language") {
+        // The page follows the panel (the language "System" is whatever the browser speaks).
+        try { window.localStorage.setItem(SHARED_LANGUAGE_KEY, languageCode); } catch (e) { /* private mode */ }
+        document.dispatchEvent(new CustomEvent("dirtymac-language", { detail: { code: languageCode, source: "demo" } }));
+      }
     });
+  });
+
+  // The page's language picker changed: the panel follows.
+  document.addEventListener("dirtymac-language", function (event) {
+    var detail = event.detail || {};
+    if (detail.source === "demo" || LANGUAGES.indexOf(detail.code) < 0 || detail.code === languageCode) return;
+    cfg.language = detail.code;
+    save();
+    renderAll();
   });
 
   // The update check is simulated: this page makes no network request of its own.

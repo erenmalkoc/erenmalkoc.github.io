@@ -80,21 +80,26 @@
     }, 2400);
   }
 
+  /* Pages that translate themselves (window.pageI18n) get their own wording. */
+  function translated(key, fallback) {
+    return window.pageI18n ? window.pageI18n.t(key, fallback) : fallback;
+  }
+
   var copyButtons = document.querySelectorAll("[data-copy]");
   for (var b = 0; b < copyButtons.length; b++) {
     (function (button) {
       button.addEventListener("click", function () {
         var text = button.getAttribute("data-copy");
         if (!navigator.clipboard) {
-          notify("Copying isn't available in this browser");
+          notify(translated("copy.unavailable", "Copying isn't available in this browser"));
           return;
         }
         navigator.clipboard.writeText(text).then(
           function () {
-            notify("Copied to clipboard");
+            notify(translated("copy.ok", "Copied to clipboard"));
           },
           function () {
-            notify("Couldn't copy — select the command manually");
+            notify(translated("copy.failed", "Couldn't copy — select the command manually"));
           }
         );
       });

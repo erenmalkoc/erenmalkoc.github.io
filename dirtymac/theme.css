@@ -295,9 +295,105 @@
   color: var(--md-on-surface);
 }
 
-@media (max-width: 40rem) {
+/* The language picker needs room, and the longer languages (Russian, Ukrainian, German) need more
+   than English: the section links make way earlier than they used to. */
+@media (max-width: 56rem) {
   .appbar__link--secondary {
     display: none;
+  }
+}
+
+/* The page language picker: the translate icon and a pill-shaped pop-up button. */
+.langpick {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.25rem;
+  color: var(--md-on-surface-variant);
+}
+
+.langpick .material-symbols-outlined {
+  position: absolute;
+  left: 0.5rem;
+  font-size: 1.125rem;
+  pointer-events: none;
+}
+
+.langpick select {
+  max-width: 9.5rem;
+  padding: 0.4375rem 1.5rem 0.4375rem 2rem;
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-shape-full);
+  background: transparent;
+  color: var(--md-on-surface);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 560;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  text-overflow: ellipsis;
+}
+
+.langpick::after {
+  content: "";
+  position: absolute;
+  right: 0.65rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-20%) rotate(45deg);
+  pointer-events: none;
+}
+
+.langpick select:hover {
+  background: var(--md-surface-container-high);
+}
+
+.langpick select:focus-visible {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 30rem) {
+  .appbar__inner {
+    gap: 0.25rem;
+  }
+
+  .appbar__brand {
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .langpick {
+    margin-right: 0;
+  }
+
+  .langpick select {
+    max-width: clamp(5.25rem, 28vw, 7.25rem);
+    padding-left: 1.75rem;
+    padding-right: 1.25rem;
+  }
+
+  .langpick .material-symbols-outlined {
+    left: 0.4rem;
+  }
+}
+
+/* On the narrowest screens the Install button keeps only its icon, the word stays for screen readers. */
+@media (max-width: 26rem) {
+  .appbar__nav .btn span[data-i18n] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .appbar__nav .btn {
+    padding-inline: 0.75rem;
   }
 }
 
