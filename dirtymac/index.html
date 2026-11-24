@@ -6,7 +6,7 @@
     <title>dirtymac — erenium.tech</title>
     <meta
       name="description"
-      content="dirtymac is a native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive."
+      content="dirtymac is a native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. The cursor keeps moving, and a palm on the trackpad scrolls and clicks nothing."
     />
     <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)" />
@@ -80,7 +80,8 @@
           <h1 class="product-hero__title">dirtymac</h1>
           <p class="product-hero__tagline">
             A native macOS menu bar utility that temporarily locks your keyboard so you can clean it
-            without triggering keys. Mouse and trackpad stay fully responsive.
+            without triggering keys. The cursor keeps moving, and a palm on the trackpad scrolls and
+            clicks nothing.
           </p>
 
           <div class="code install-cmd">
@@ -183,6 +184,11 @@
                         <div class="status__stack" data-status-idle>
                           <strong data-t="Click to Lock Keyboard">Click to Lock Keyboard</strong>
                           <span data-caption>Mouse and trackpad stay enabled.</span>
+                          <div class="autorow" data-auto-row>
+                            <span class="sym sym--timer" aria-hidden="true"></span>
+                            <span id="l-auto-panel" data-t="Auto-unlock">Auto-unlock</span>
+                            <span class="popup popup--small popup--panel"><select aria-labelledby="l-auto-panel" data-select="autoUnlockSeconds"></select></span>
+                          </div>
                         </div>
                         <div class="status__stack status__wait" data-status-wait>
                           <strong data-wait-text aria-live="polite">Locking in 5…</strong>
@@ -230,7 +236,7 @@
                   <hr class="popover__rule" />
                   <div class="popover__footer">
                     <button class="mac-btn mac-btn--icon" type="button" data-open-settings aria-label="Settings"><span class="gear" aria-hidden="true"></span></button>
-                    <span class="popover__version">v1.4.0</span>
+                    <span class="popover__version">v1.4.5</span>
                     <button class="mac-btn" type="button" data-quit data-t="Quit">Quit</button>
                   </div>
                 </section>
@@ -251,6 +257,7 @@
                           <button type="button" role="radio" data-value="basic" data-t="Basic">Basic</button>
                           <button type="button" role="radio" data-value="advanced" data-t="Advanced">Advanced</button>
                         </div>
+                        <div class="row row--between" data-basic-timer><span id="l-auto-basic" data-t="Auto-unlock">Auto-unlock</span><span class="popup popup--small"><select aria-labelledby="l-auto-basic" data-select="autoUnlockSeconds"></select></span></div>
                         <div class="advanced" data-advanced hidden>
                           <div class="row"><span id="l-mod" data-t="Block modifier keys">Block modifier keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-mod" data-switch="blockModifierKeys"></button></div>
                           <div class="row"><span id="l-media" data-t="Block media & brightness keys">Block media &amp; brightness keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-media" data-switch="blockMediaKeys"></button></div>
@@ -271,6 +278,10 @@
                         <h3 data-t="While locked">While locked</h3>
                         <div class="row"><span id="l-awake" data-t="Keep the screen awake">Keep the screen awake</span><button class="switch" type="button" role="switch" aria-labelledby="l-awake" data-switch="keepDisplayAwake"></button></div>
                         <p class="note" data-t="Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.">Stops the screen from dimming.</p>
+                        <div class="row"><span id="l-guard" data-t="Ignore scrolling and clicks">Ignore scrolling and clicks</span><button class="switch" type="button" role="switch" aria-labelledby="l-guard" data-switch="guardPointer"></button></div>
+                        <p class="note" data-t="While the keyboard is locked, scrolling, gestures and clicks do nothing, so a palm on the trackpad changes nothing. The dirtymac icon and panel still respond, and the cursor still moves.">While the keyboard is locked, scrolling, gestures and clicks do nothing.</p>
+                        <div class="row"><span id="l-gestures" data-t="Turn off trackpad gestures">Turn off trackpad gestures</span><button class="switch" type="button" role="switch" aria-labelledby="l-gestures" data-switch="suppressGestures"></button></div>
+                        <p class="note" data-t="Swipes with three or four fingers, which switch screens or open Mission Control, are turned off while the keyboard is locked and come back when it unlocks. The Dock restarts briefly each time. If dirtymac quits unexpectedly, they come back the next time it opens.">Swipes with three or four fingers are turned off while the keyboard is locked.</p>
                       </div>
 
                       <div class="sgroup">
@@ -312,7 +323,7 @@
                         <h3 data-t="Help">Help</h3>
                         <div class="row row--buttons">
                           <a class="mac-btn" href="#install" data-t="Show Welcome Screen">Show Welcome Screen</a>
-                          <a class="mac-btn" href="https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.0" rel="noopener" data-t="What's New">What's New</a>
+                          <a class="mac-btn" href="https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.5" rel="noopener" data-t="What's New">What's New</a>
                         </div>
                       </div>
 
@@ -320,7 +331,7 @@
                   </div>
                   <hr class="popover__rule" />
                   <div class="popover__footer">
-                    <span class="popover__version">v1.4.0</span>
+                    <span class="popover__version">v1.4.5</span>
                   </div>
                 </section>
 
@@ -341,15 +352,15 @@
               <p>
                 Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window full
                 of garbage characters and accidentally launching apps. dirtymac suppresses every
-                keystroke at the system event-tap level until you click stop. Your trackpad keeps
-                working the entire time.
+                keystroke at the system event-tap level until you click stop. The cursor keeps moving the
+                whole time, but a palm on the trackpad scrolls and clicks nothing.
               </p>
             </div>
           </div>
           <figure class="demo">
             <img
             src="../assets/dirtymac-demo.gif"
-            alt="dirtymac locking the keyboard from the macOS menu bar while the trackpad keeps working"
+            alt="dirtymac locking the keyboard from the macOS menu bar"
             width="462"
             height="400"
             loading="lazy"
@@ -407,7 +418,11 @@
             <span class="material-symbols-outlined" aria-hidden="true">mouse</span>
             <div>
               <h3>Basic mode</h3>
-              <p>Mouse and trackpad stay live — click the menu bar icon to release the lock.</p>
+              <p>
+                The cursor stays live and so does the menu bar icon: click it to release the lock.
+                Scrolling, gestures and clicks elsewhere are ignored, and the trackpad's system swipes
+                are switched off for the lock and put back after.
+              </p>
             </div>
           </li>
           <li class="feature">
@@ -600,17 +615,29 @@
             dirtymac creates a <code>CGEventTap</code> at the session level. The event mask is built
             from the active lock configuration: <code>keyDown</code> and <code>keyUp</code> are
             always present, while <code>flagsChanged</code>, the aux-control channel behind
-            brightness / volume / media keys, and the mouse, trackpad and scroll types are added only
-            when the matching Advanced toggles are on. The callback returns nothing for blocked
-            events, removing them from the system input queue.
+            brightness / volume / media keys, and the mouse, trackpad and scroll types are added when
+            the matching toggles are on (Ignore scrolling and clicks, and the Advanced mouse
+            freeze). The pointer events are tapped a second time at the HID level, before the
+            session. The callback returns nothing for blocked events, removing them from the system
+            input queue.
           </p>
           <p>
-            In Basic mode the pointer types are never in the mask, so the mouse and trackpad keep
-            working — including the click that opens the menu and releases the lock. Advanced full
-            lockdown adds them, and the universal hold-Esc exit plus a mandatory auto-unlock timer
-            guarantee the lock can always be released. The power button is deliberately let through
-            so a hardware escape hatch always remains. If macOS disables the tap after a timeout,
-            dirtymac re-enables it automatically.
+            In Basic mode plain mouse movement is not in the mask, so the cursor keeps moving. Clicks,
+            drags, scrolling and gestures are, behind a guard that lets a press through only when it
+            goes down over one of dirtymac's own windows, which keeps the click that opens the menu
+            and releases the lock working. Advanced full lockdown freezes the cursor too, and the
+            universal hold-Esc exit plus a mandatory auto-unlock timer guarantee the lock can always
+            be released. If macOS disables the tap after a timeout, dirtymac re-enables it
+            automatically.
+          </p>
+          <p>
+            On macOS 27 trackpad scrolling reaches apps without passing any event tap, and the system
+            swipes (Mission Control, Spaces) are handled by the Dock. So during a lock dirtymac also
+            covers every screen with a nearly invisible window of its own, below the menu bar, that
+            takes scrolls and clicks, and switches the trackpad's gesture settings off, writing the
+            original values down first so they come back after every lock and after a crash. The
+            power button cannot be blocked: a press never reaches an event tap, so it still puts the
+            Mac to sleep and ends the lock.
           </p>
         </div>
       </section>

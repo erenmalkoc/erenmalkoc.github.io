@@ -45,6 +45,8 @@
     blockMouseAndTrackpad: false,
     autoUnlockSeconds: 0,
     keepDisplayAwake: true,
+    guardPointer: true,
+    suppressGestures: true,
     startDelaySeconds: 0,
     playSounds: true,
     appearance: "system",
@@ -68,7 +70,7 @@
     if (["basic", "advanced"].indexOf(out.mode) < 0) out.mode = "basic";
     if (["system", "light", "dark"].indexOf(out.appearance) < 0) out.appearance = "system";
     if (out.language !== "system" && LANGUAGES.indexOf(out.language) < 0) out.language = "system";
-    out.autoUnlockSeconds = clampedSeconds(AUTO_UNLOCK_CHOICES.indexOf(out.autoUnlockSeconds) < 0 ? 0 : out.autoUnlockSeconds, out.blockMouseAndTrackpad);
+    out.autoUnlockSeconds = clampedSeconds(AUTO_UNLOCK_CHOICES.indexOf(out.autoUnlockSeconds) < 0 ? 0 : out.autoUnlockSeconds, out.mode === "advanced" && out.blockMouseAndTrackpad);
     if (START_DELAY_CHOICES.indexOf(out.startDelaySeconds) < 0) out.startDelaySeconds = 0;
     return out;
   }
@@ -83,12 +85,13 @@
     return mouseLocked ? Math.min(Math.max(seconds, MIN_MOUSE_LOCK), MAX_MOUSE_LOCK) : seconds;
   }
 
-  // LockConfiguration.effective: Basic is a fixed safe preset.
+  // LockConfiguration.effective: Basic is a fixed safe preset of keys and mouse. It keeps the
+  // timer the person chose (the mouse is free, so any length is safe).
   function effective(c) {
     if (c.mode !== "advanced") {
       return {
         blockMouseAndTrackpad: false,
-        autoUnlockSeconds: 0,
+        autoUnlockSeconds: AUTO_UNLOCK_CHOICES.indexOf(c.autoUnlockSeconds) < 0 ? 0 : c.autoUnlockSeconds,
         startDelaySeconds: c.startDelaySeconds
       };
     }
@@ -409,6 +412,7 @@
       b.setAttribute("aria-checked", b.dataset.value === cfg.appearance ? "true" : "false");
     });
     setHidden($("[data-advanced]"), !advanced);
+    setHidden($("[data-basic-timer]"), advanced);
     $all("[data-switch]").forEach(function (b) {
       b.setAttribute("aria-checked", cfg[b.dataset.switch] ? "true" : "false");
     });
@@ -443,10 +447,14 @@
   }
 
   function renderSelects() {
-    var offered = offeredAutoUnlock(cfg.blockMouseAndTrackpad);
-    fillSelect($("[data-select=autoUnlockSeconds]"), offered.map(function (s) {
-      return [s, s === 0 ? t("Off") : durationTitle(s)];
-    }), cfg.autoUnlockSeconds);
+    // The panel, Basic Settings and Advanced Settings all show the one setting. Only a
+    // frozen mouse holds lengths back, and only Advanced can freeze it.
+    var offered = offeredAutoUnlock(effective(cfg).blockMouseAndTrackpad);
+    $all("[data-select=autoUnlockSeconds]").forEach(function (select) {
+      fillSelect(select, offered.map(function (s) {
+        return [s, s === 0 ? t("Off") : durationTitle(s)];
+      }), effective(cfg).autoUnlockSeconds);
+    });
     fillSelect($("[data-select=startDelaySeconds]"), START_DELAY_CHOICES.map(function (s) {
       return [s, s === 0 ? t("Off") : durationTitle(s)];
     }), cfg.startDelaySeconds);

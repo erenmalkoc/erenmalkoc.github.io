@@ -790,6 +790,29 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Basic Settings: the same Auto-unlock row sits under the mode picker, 4 pt lower like the app's. */
+[data-basic-timer] {
+  margin-top: 4px;
+}
+
+/* The Auto-unlock choice under the ready text: a caption label with the timer symbol and a
+   small pop-up button (MainView.autoUnlockRow). */
+.autorow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--popover-ink-2);
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.autorow .sym--timer {
+  width: 11px;
+  height: 11px;
+}
+
 /* While locked: the way out. The bar takes its room even when empty, and the
    text two lines of it, so the panel does not jump as the hold runs. */
 .hold {
