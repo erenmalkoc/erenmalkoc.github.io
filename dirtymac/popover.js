@@ -25,7 +25,7 @@
   var HOLD_MS = 3000; // KeyboardBlocker.escHoldDuration
   var GRACE_MS = 1500; // KeyboardBlocker.escReleaseGrace: a lost key-up cannot keep the lock on
   var MIN_MOUSE_LOCK = 30; // LockConfiguration.minMouseLockSeconds
-  var MAX_MOUSE_LOCK = 15 * 60; // LockConfiguration.maxMouseLockSeconds
+  var MAX_MOUSE_LOCK = 24 * 60 * 60; // LockConfiguration.maxMouseLockSeconds: a day since 1.4.7 (it was 15 min)
   var ESC_CHECK_ABOVE = 5 * 60; // LockConfiguration.escCheckAboveSeconds
   var AUTO_UNLOCK_CHOICES = [0, 30, 60, 120, 300, 600, 900, 1800, 3600, 7200, 14400, 28800, 43200, 86400];
   var MAX_AUTO_UNLOCK = 24 * 60 * 60; // LockConfiguration.maxAutoUnlockSeconds: a day
@@ -99,7 +99,7 @@
   }
 
   // Once the mouse is part of the lock the menu bar can no longer be clicked, so the
-  // timer is never off, never shorter than 30 s and never longer than 15 min.
+  // timer is never off and never shorter than 30 s (and, like every lock, at most a day).
   function clampedSeconds(seconds, mouseLocked) {
     return mouseLocked ? Math.min(Math.max(seconds, MIN_MOUSE_LOCK), MAX_MOUSE_LOCK) : seconds;
   }
@@ -118,9 +118,7 @@
     }
     var length;
     if (c.blockMouseAndTrackpad) {
-      var clamped = clampedSeconds(seconds, true);
-      // A length or time entered by hand snaps to what a frozen mouse offers.
-      length = c.autoUnlockCustom || c.autoUnlockAtMinutes >= 0 ? nearestOffered(clamped) : clamped;
+      length = clampedSeconds(seconds, true);
     } else {
       length = Math.min(Math.max(seconds, 0), MAX_AUTO_UNLOCK);
     }
@@ -141,23 +139,17 @@
     return Math.min(Math.max(seconds, MIN_MOUSE_LOCK), MAX_AUTO_UNLOCK);
   }
 
-  function nearestOffered(seconds) {
-    var offered = offeredAutoUnlock(true);
-    return offered.reduce(function (best, s) { return Math.abs(s - seconds) < Math.abs(best - seconds) ? s : best; }, offered[0]);
-  }
-
   // LockConfiguration.requiresLongLockConfirm
   function requiresLongLock(e) {
     return !e.blockMouseAndTrackpad && e.autoUnlockSeconds > LONG_LOCK_ABOVE;
   }
 
-  // What the pop-up shows (AutoUnlockEntry.selection): the length, "custom", or while the mouse is
-  // frozen the length the lock will use.
+  // What the pop-up shows (AutoUnlockEntry.selection): the length the lock will use, or "custom".
   function timerSelection() {
     var frozen = effective(cfg).blockMouseAndTrackpad;
-    if (frozen) return nearestOffered(clampedSeconds(cfg.autoUnlockSeconds, true));
-    if (cfg.autoUnlockCustom || cfg.autoUnlockAtMinutes >= 0 || AUTO_UNLOCK_CHOICES.indexOf(cfg.autoUnlockSeconds) < 0) return "custom";
-    return cfg.autoUnlockSeconds;
+    var used = frozen ? clampedSeconds(cfg.autoUnlockSeconds, true) : cfg.autoUnlockSeconds;
+    if (cfg.autoUnlockCustom || cfg.autoUnlockAtMinutes >= 0 || AUTO_UNLOCK_CHOICES.indexOf(used) < 0) return "custom";
+    return used;
   }
 
   function requiresEscCheck(e) {
@@ -474,7 +466,7 @@
   }
 
   function renderTimerBoxes(frozen) {
-    var shown = !frozen && timerSelection() === "custom";
+    var shown = timerSelection() === "custom";
     $all("[data-timer-box]").forEach(function (host, i) {
       if (!boxes[i]) boxes[i] = buildTimerBox(host);
       var box = boxes[i];
@@ -597,6 +589,7 @@
         "The keyboard stays locked for %@ unless you unlock it sooner.",
         durationTitle(e.autoUnlockSeconds)
       );
+      setHidden($("[data-confirm-awake]"), !(e.autoUnlockSeconds > LONG_LOCK_ABOVE && cfg.keepDisplayAwake));
       var needsCheck = requiresEscCheck(e);
       setHidden($("[data-esc-check]"), !needsCheck);
       setHidden($("[data-esc-progress]"), check.passed);
@@ -628,8 +621,7 @@
     setHidden(note, !frozen);
     if (frozen) {
       note.textContent = t(
-        "With the mouse frozen, the lock lasts at most %@. Above %@, dirtymac asks you to hold Esc first to check your way out.",
-        durationTitle(MAX_MOUSE_LOCK),
+        "With the mouse frozen, the lock always ends by itself. Above %@, dirtymac asks you to hold Esc first to check your way out.",
         durationTitle(ESC_CHECK_ABOVE)
       );
     }
@@ -661,8 +653,8 @@
       var options = offered.map(function (s) {
         return [s, s === 0 ? t("Off") : durationTitle(s)];
       });
-      // "Custom…" opens the box for any length or a time of day: not while the mouse is frozen.
-      if (!frozen) options.push(["custom", t("Custom…")]);
+      // "Custom…" opens the box for any length or a time of day, with the mouse frozen too.
+      options.push(["custom", t("Custom…")]);
       fillSelect(select, options, timerSelection());
     });
     renderTimerBoxes(frozen);
@@ -792,7 +784,7 @@
       var key = button.dataset.switch;
       cfg[key] = !cfg[key];
       if (key === "blockMouseAndTrackpad") {
-        // Mouse lockdown removes the click-to-unlock exit, so the timer is forced into 30 s to 15 min.
+        // Mouse lockdown removes the click-to-unlock exit, so the timer is never off and at least 30 s.
         cfg.autoUnlockSeconds = clampedSeconds(cfg.autoUnlockSeconds, cfg[key]);
       }
       if (key === "updateChecks" && cfg[key]) runUpdateCheck();
