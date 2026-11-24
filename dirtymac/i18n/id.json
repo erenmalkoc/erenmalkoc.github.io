@@ -79,5 +79,7 @@
  "demo.aria": "Panel bilah menu dirtymac, pratinjau interaktif",
  "copy.ok": "Disalin ke papan klip",
  "copy.unavailable": "Penyalinan tidak tersedia di browser ini",
- "copy.failed": "Gagal menyalin — pilih perintahnya secara manual"
+ "copy.failed": "Gagal menyalin — pilih perintahnya secara manual",
+ "f.timer.title": "Buka kunci otomatis hingga sehari",
+ "f.timer.text": "Pilih durasi dari 30 detik hingga 24 jam, ketik durasi apa saja, atau pilih jam untuk membuka kunci. Kunci yang lebih dari satu jam akan meminta konfirmasi dulu dan menyebutkan kapan berakhirnya."
 }

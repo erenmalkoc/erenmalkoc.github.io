@@ -27,7 +27,10 @@
   var MIN_MOUSE_LOCK = 30; // LockConfiguration.minMouseLockSeconds
   var MAX_MOUSE_LOCK = 15 * 60; // LockConfiguration.maxMouseLockSeconds
   var ESC_CHECK_ABOVE = 5 * 60; // LockConfiguration.escCheckAboveSeconds
-  var AUTO_UNLOCK_CHOICES = [0, 30, 60, 120, 300, 600, 900, 1800, 3600];
+  var AUTO_UNLOCK_CHOICES = [0, 30, 60, 120, 300, 600, 900, 1800, 3600, 7200, 14400, 28800, 43200, 86400];
+  var MAX_AUTO_UNLOCK = 24 * 60 * 60; // LockConfiguration.maxAutoUnlockSeconds: a day
+  var LONG_LOCK_ABOVE = 60 * 60; // LockConfiguration.longLockAboveSeconds: more asks first
+  var MIN_CUSTOM = 60; // AutoUnlockEntry.minCustomSeconds
   var START_DELAY_CHOICES = [0, 3, 5, 10];
   var HOT_KEYS = {
     off: "",
@@ -44,6 +47,8 @@
     blockMediaKeys: true,
     blockMouseAndTrackpad: false,
     autoUnlockSeconds: 0,
+    autoUnlockAtMinutes: -1, // "Until 17:30" in minutes after midnight, -1 for a length
+    autoUnlockCustom: false,
     keepDisplayAwake: true,
     guardPointer: true,
     suppressGestures: true,
@@ -81,7 +86,10 @@
       var shared = window.localStorage.getItem(SHARED_LANGUAGE_KEY);
       if (LANGUAGES.indexOf(shared) >= 0) out.language = shared;
     } catch (e) { /* private mode */ }
-    out.autoUnlockSeconds = clampedSeconds(AUTO_UNLOCK_CHOICES.indexOf(out.autoUnlockSeconds) < 0 ? 0 : out.autoUnlockSeconds, out.mode === "advanced" && out.blockMouseAndTrackpad);
+    // None, or anything from 30 seconds to a day: a length entered by hand is not on the list.
+    if (!(out.autoUnlockSeconds === 0 || (out.autoUnlockSeconds >= 30 && out.autoUnlockSeconds <= MAX_AUTO_UNLOCK))) out.autoUnlockSeconds = 0;
+    if (!(out.autoUnlockAtMinutes >= 0 && out.autoUnlockAtMinutes < 24 * 60)) out.autoUnlockAtMinutes = -1;
+    out.autoUnlockSeconds = clampedSeconds(out.autoUnlockSeconds, out.mode === "advanced" && out.blockMouseAndTrackpad);
     if (START_DELAY_CHOICES.indexOf(out.startDelaySeconds) < 0) out.startDelaySeconds = 0;
     return out;
   }
@@ -99,18 +107,57 @@
   // LockConfiguration.effective: Basic is a fixed safe preset of keys and mouse. It keeps the
   // timer the person chose (the mouse is free, so any length is safe).
   function effective(c) {
+    // "Until 17:30" is worked out now, so it is always the next 17:30.
+    var seconds = c.autoUnlockAtMinutes >= 0 ? secondsUntil(c.autoUnlockAtMinutes, new Date()) : c.autoUnlockSeconds;
     if (c.mode !== "advanced") {
       return {
         blockMouseAndTrackpad: false,
-        autoUnlockSeconds: AUTO_UNLOCK_CHOICES.indexOf(c.autoUnlockSeconds) < 0 ? 0 : c.autoUnlockSeconds,
+        autoUnlockSeconds: seconds === 0 || (seconds >= 30 && seconds <= MAX_AUTO_UNLOCK) ? seconds : 0,
         startDelaySeconds: c.startDelaySeconds
       };
     }
+    var length;
+    if (c.blockMouseAndTrackpad) {
+      var clamped = clampedSeconds(seconds, true);
+      // A length or time entered by hand snaps to what a frozen mouse offers.
+      length = c.autoUnlockCustom || c.autoUnlockAtMinutes >= 0 ? nearestOffered(clamped) : clamped;
+    } else {
+      length = Math.min(Math.max(seconds, 0), MAX_AUTO_UNLOCK);
+    }
     return {
       blockMouseAndTrackpad: c.blockMouseAndTrackpad,
-      autoUnlockSeconds: clampedSeconds(c.autoUnlockSeconds, c.blockMouseAndTrackpad),
+      autoUnlockSeconds: length,
       startDelaySeconds: c.startDelaySeconds
     };
+  }
+
+  // LockConfiguration.secondsUntil: the next time the clock reads that, never under 30 s, never over a day.
+  function secondsUntil(minutesOfDay, now) {
+    var minutes = Math.min(Math.max(minutesOfDay, 0), 24 * 60 - 1);
+    var target = new Date(now.getTime());
+    target.setHours(Math.floor(minutes / 60), minutes % 60, 0, 0);
+    if (target.getTime() <= now.getTime()) target.setDate(target.getDate() + 1);
+    var seconds = Math.ceil((target.getTime() - now.getTime()) / 1000);
+    return Math.min(Math.max(seconds, MIN_MOUSE_LOCK), MAX_AUTO_UNLOCK);
+  }
+
+  function nearestOffered(seconds) {
+    var offered = offeredAutoUnlock(true);
+    return offered.reduce(function (best, s) { return Math.abs(s - seconds) < Math.abs(best - seconds) ? s : best; }, offered[0]);
+  }
+
+  // LockConfiguration.requiresLongLockConfirm
+  function requiresLongLock(e) {
+    return !e.blockMouseAndTrackpad && e.autoUnlockSeconds > LONG_LOCK_ABOVE;
+  }
+
+  // What the pop-up shows (AutoUnlockEntry.selection): the length, "custom", or while the mouse is
+  // frozen the length the lock will use.
+  function timerSelection() {
+    var frozen = effective(cfg).blockMouseAndTrackpad;
+    if (frozen) return nearestOffered(clampedSeconds(cfg.autoUnlockSeconds, true));
+    if (cfg.autoUnlockCustom || cfg.autoUnlockAtMinutes >= 0 || AUTO_UNLOCK_CHOICES.indexOf(cfg.autoUnlockSeconds) < 0) return "custom";
+    return cfg.autoUnlockSeconds;
   }
 
   function requiresEscCheck(e) {
@@ -149,20 +196,37 @@
     return text.replace(/%(?:\d+\$)?(?:@|lld)/g, function () { return String(args[next++]); });
   }
 
+  // "30 sec", "1 hr", "8 hr 30 min": every unit that is not zero, like the app's Duration style.
   function durationTitle(seconds) {
-    var unit = seconds >= 3600 ? "hour" : seconds >= 60 ? "minute" : "second";
-    var value = unit === "hour" ? seconds / 3600 : unit === "minute" ? seconds / 60 : seconds;
-    try {
-      return new Intl.NumberFormat(languageCode, { style: "unit", unit: unit, unitDisplay: "short" }).format(value);
-    } catch (e) {
-      return value + (unit === "hour" ? " h" : unit === "minute" ? " min" : " s");
-    }
+    var parts = [];
+    var rest = Math.max(0, Math.round(seconds));
+    [["hour", 3600, " h"], ["minute", 60, " min"], ["second", 1, " s"]].forEach(function (u) {
+      var value = Math.floor(rest / u[1]);
+      rest -= value * u[1];
+      if (value > 0) {
+        try {
+          parts.push(new Intl.NumberFormat(languageCode, { style: "unit", unit: u[0], unitDisplay: "short" }).format(value));
+        } catch (e) {
+          parts.push(value + u[2]);
+        }
+      }
+    });
+    return parts.join(" ") || "0";
   }
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
+  // LockStatusTitle.clock: 05:07, and 1:15:10 from an hour on.
   function clock(seconds) {
     var s = Math.max(0, seconds);
+    if (s >= 3600) return Math.floor(s / 3600) + ":" + pad(Math.floor((s % 3600) / 60)) + ":" + pad(s % 60);
     return pad(Math.floor(s / 60)) + ":" + pad(s % 60);
+  }
+
+  // AutoUnlockEntry.endTitle: "11:30 PM", or "Wed 7:00 AM" when it is not today.
+  function endTitle(end, now) {
+    var sameDay = end.toDateString() === now.toDateString();
+    var options = sameDay ? { hour: "numeric", minute: "2-digit" } : { weekday: "short", hour: "numeric", minute: "2-digit" };
+    try { return new Intl.DateTimeFormat(languageCode, options).format(end); } catch (e) { return end.toLocaleTimeString(); }
   }
 
   // ------------------------------------------------------------------ state
@@ -263,6 +327,7 @@
     if (state === "locked") unlockedBy("clicked");
     else if (state === "waiting") cancelWait();
     else if (effective(cfg).blockMouseAndTrackpad) enterConfirm();
+    else if (requiresLongLock(effective(cfg))) enterLongConfirm();
     else beginLock(false);
   }
 
@@ -301,7 +366,13 @@
 
   function leaveConfirm() {
     resetCheck();
-    if (state === "confirm") state = "idle";
+    if (state === "confirm" || state === "confirmLong") state = "idle";
+    render();
+  }
+
+  // MainView.longLockConfirm: a lock of many hours says when it ends before it starts.
+  function enterLongConfirm() {
+    state = "confirmLong";
     render();
   }
 
@@ -331,6 +402,118 @@
     check.timer = null;
     check.held = false;
     render();
+  }
+
+  // ------------------------------------------------------------------ the timer entry box (AutoUnlockControl)
+
+  var boxes = [];
+
+  // One box per place the timer is shown (the panel, Basic and Advanced Settings), built once.
+  function buildTimerBox(host) {
+    var box = { host: host };
+    host.innerHTML =
+      '<div class="seg seg--small" role="radiogroup">' +
+      '<button type="button" role="radio" data-kind="length"></button>' +
+      '<button type="button" role="radio" data-kind="clock"></button></div>' +
+      '<div class="timerbox__fields" data-fields-length>' +
+      '<label class="timerbox__field"><input type="number" min="0" max="24" step="1" inputmode="numeric" data-hours><span data-hours-unit></span></label>' +
+      '<label class="timerbox__field"><input type="number" min="0" max="59" step="1" inputmode="numeric" data-minutes><span data-minutes-unit></span></label></div>' +
+      '<div class="timerbox__fields" data-fields-clock><input type="time" step="60" data-time></div>' +
+      '<p class="timerbox__end" data-end></p>';
+    box.seg = host.querySelector(".seg");
+    box.lengthButton = host.querySelector("[data-kind=length]");
+    box.clockButton = host.querySelector("[data-kind=clock]");
+    box.lengthFields = host.querySelector("[data-fields-length]");
+    box.clockFields = host.querySelector("[data-fields-clock]");
+    box.hours = host.querySelector("[data-hours]");
+    box.minutes = host.querySelector("[data-minutes]");
+    box.time = host.querySelector("[data-time]");
+    box.end = host.querySelector("[data-end]");
+
+    function commitLength() {
+      var h = Math.min(Math.max(parseInt(box.hours.value, 10) || 0, 0), 24);
+      var m = h === 24 ? 0 : Math.min(Math.max(parseInt(box.minutes.value, 10) || 0, 0), 59);
+      cfg.autoUnlockSeconds = Math.min(Math.max(h * 3600 + m * 60, MIN_CUSTOM), MAX_AUTO_UNLOCK);
+      cfg.autoUnlockCustom = true;
+      save();
+      renderTimerBoxes(false);
+      renderPanel();
+    }
+    box.hours.addEventListener("input", commitLength);
+    box.minutes.addEventListener("input", commitLength);
+    box.hours.addEventListener("change", function () { renderAll(); });
+    box.minutes.addEventListener("change", function () { renderAll(); });
+    box.time.addEventListener("input", function () {
+      var match = /^(\d{1,2}):(\d{2})/.exec(box.time.value);
+      if (!match) return;
+      cfg.autoUnlockAtMinutes = Math.min(parseInt(match[1], 10), 23) * 60 + Math.min(parseInt(match[2], 10), 59);
+      cfg.autoUnlockCustom = true;
+      save();
+      renderTimerBoxes(false);
+      renderPanel();
+    });
+    // AutoUnlockEntry.switchedToClock / switchedToLength
+    box.lengthButton.addEventListener("click", function () {
+      if (cfg.autoUnlockAtMinutes < 0) return;
+      var seconds = Math.floor(secondsUntil(cfg.autoUnlockAtMinutes, new Date()) / 60) * 60;
+      cfg.autoUnlockSeconds = Math.min(Math.max(seconds, MIN_CUSTOM), MAX_AUTO_UNLOCK);
+      cfg.autoUnlockAtMinutes = -1;
+      cfg.autoUnlockCustom = true;
+      save();
+      renderAll();
+    });
+    box.clockButton.addEventListener("click", function () {
+      if (cfg.autoUnlockAtMinutes >= 0) return;
+      var end = new Date(Date.now() + Math.max(cfg.autoUnlockSeconds, MIN_CUSTOM) * 1000);
+      cfg.autoUnlockAtMinutes = end.getHours() * 60 + end.getMinutes();
+      cfg.autoUnlockCustom = true;
+      save();
+      renderAll();
+    });
+    return box;
+  }
+
+  function renderTimerBoxes(frozen) {
+    var shown = !frozen && timerSelection() === "custom";
+    $all("[data-timer-box]").forEach(function (host, i) {
+      if (!boxes[i]) boxes[i] = buildTimerBox(host);
+      var box = boxes[i];
+      host.hidden = !shown;
+      if (!shown) return;
+      var clockMode = cfg.autoUnlockAtMinutes >= 0;
+      box.lengthButton.textContent = t("For");
+      box.clockButton.textContent = t("Until");
+      box.lengthButton.setAttribute("aria-checked", clockMode ? "false" : "true");
+      box.clockButton.setAttribute("aria-checked", clockMode ? "true" : "false");
+      box.lengthFields.hidden = clockMode;
+      box.clockFields.hidden = !clockMode;
+      box.hours.setAttribute("aria-label", t("Hours"));
+      box.minutes.setAttribute("aria-label", t("Minutes"));
+      box.time.setAttribute("aria-label", t("Until"));
+      var hm = [Math.floor(cfg.autoUnlockSeconds / 3600), Math.floor((cfg.autoUnlockSeconds % 3600) / 60)];
+      // Never rewritten while it is being typed in.
+      if (document.activeElement !== box.hours) box.hours.value = hm[0];
+      if (document.activeElement !== box.minutes) box.minutes.value = hm[1];
+      box.hours.nextElementSibling.textContent = durationUnit(hm[0], "hour");
+      box.minutes.nextElementSibling.textContent = durationUnit(hm[1], "minute");
+      if (document.activeElement !== box.time) {
+        var at = Math.max(cfg.autoUnlockAtMinutes, 0);
+        box.time.value = pad(Math.floor(at / 60)) + ":" + pad(at % 60);
+      }
+      var now = new Date();
+      var seconds = clockMode ? secondsUntil(cfg.autoUnlockAtMinutes, now) : cfg.autoUnlockSeconds;
+      box.end.textContent = seconds > 0 ? t("Unlocks at %@", endTitle(new Date(now.getTime() + seconds * 1000), now)) : "";
+    });
+  }
+
+  // "hr" / "min" next to a number field, in the language of the page.
+  function durationUnit(value, unit) {
+    try {
+      var parts = new Intl.NumberFormat(languageCode, { style: "unit", unit: unit, unitDisplay: "short" }).formatToParts(value);
+      return parts.filter(function (p) { return p.type === "unit"; }).map(function (p) { return p.value; }).join("");
+    } catch (e) {
+      return unit === "hour" ? "h" : "min";
+    }
   }
 
   // ------------------------------------------------------------------ rendering
@@ -394,6 +577,18 @@
     if (menubarTitle) {
       menubarTitle.hidden = title === null;
       if (title !== null && menubarTitle.textContent !== title) menubarTitle.textContent = title;
+    }
+
+    // the long lock confirmation
+    if (state === "confirmLong") {
+      var now = new Date();
+      var end = new Date(now.getTime() + e.autoUnlockSeconds * 1000);
+      $("[data-long-text]").textContent = t(
+        "The keyboard stays locked for %@, until %@, unless you unlock it sooner.",
+        durationTitle(e.autoUnlockSeconds),
+        endTitle(end, now)
+      );
+      setHidden($("[data-long-awake]"), !cfg.keepDisplayAwake);
     }
 
     // confirmation
@@ -460,12 +655,17 @@
   function renderSelects() {
     // The panel, Basic Settings and Advanced Settings all show the one setting. Only a
     // frozen mouse holds lengths back, and only Advanced can freeze it.
-    var offered = offeredAutoUnlock(effective(cfg).blockMouseAndTrackpad);
+    var frozen = effective(cfg).blockMouseAndTrackpad;
+    var offered = offeredAutoUnlock(frozen);
     $all("[data-select=autoUnlockSeconds]").forEach(function (select) {
-      fillSelect(select, offered.map(function (s) {
+      var options = offered.map(function (s) {
         return [s, s === 0 ? t("Off") : durationTitle(s)];
-      }), effective(cfg).autoUnlockSeconds);
+      });
+      // "Custom…" opens the box for any length or a time of day: not while the mouse is frozen.
+      if (!frozen) options.push(["custom", t("Custom…")]);
+      fillSelect(select, options, timerSelection());
     });
+    renderTimerBoxes(frozen);
     fillSelect($("[data-select=startDelaySeconds]"), START_DELAY_CHOICES.map(function (s) {
       return [s, s === 0 ? t("Off") : durationTitle(s)];
     }), cfg.startDelaySeconds);
@@ -547,6 +747,12 @@
   });
 
   $("[data-wait-cancel]").addEventListener("click", cancelWait);
+  $("[data-long-cancel]").addEventListener("click", leaveConfirm);
+  $("[data-long-lock]").addEventListener("click", function () {
+    state = "idle";
+    beginLock(false);
+    render();
+  });
   $("[data-confirm-cancel]").addEventListener("click", leaveConfirm);
   $("[data-confirm-lock]").addEventListener("click", function () {
     var verified = check.passed;
@@ -600,8 +806,22 @@
     select.addEventListener("change", function () {
       var key = select.dataset.select;
       var value = select.value;
-      cfg[key] = key === "autoUnlockSeconds" || key === "startDelaySeconds" ? Number(value) : value;
-      if (key === "autoUnlockSeconds") cfg[key] = clampedSeconds(cfg[key], effective(cfg).blockMouseAndTrackpad);
+      if (key === "autoUnlockSeconds") {
+        // AutoUnlockEntry.choosing: "Custom…" keeps the length (an hour if there was none), a list entry ends any entry.
+        if (value === "custom") {
+          cfg.autoUnlockCustom = true;
+          if (cfg.autoUnlockAtMinutes < 0 && cfg.autoUnlockSeconds < MIN_CUSTOM) cfg.autoUnlockSeconds = 3600;
+        } else {
+          cfg.autoUnlockSeconds = Number(value);
+          cfg.autoUnlockAtMinutes = -1;
+          cfg.autoUnlockCustom = false;
+        }
+        cfg.autoUnlockSeconds = clampedSeconds(cfg.autoUnlockSeconds, effective(cfg).blockMouseAndTrackpad);
+        save();
+        renderAll();
+        return;
+      }
+      cfg[key] = key === "startDelaySeconds" ? Number(value) : value;
       save();
       renderAll();
       if (key === "language") {

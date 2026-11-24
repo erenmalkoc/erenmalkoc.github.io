@@ -79,5 +79,7 @@
  "demo.aria": "Panneau de la barre des menus de dirtymac, aperçu interactif",
  "copy.ok": "Copié dans le presse-papiers",
  "copy.unavailable": "La copie n'est pas disponible dans ce navigateur",
- "copy.failed": "Impossible de copier — sélectionnez la commande manuellement"
+ "copy.failed": "Impossible de copier — sélectionnez la commande manuellement",
+ "f.timer.title": "Déverrouillage auto jusqu'à un jour",
+ "f.timer.text": "Choisissez une durée de 30 secondes à 24 heures, saisissez celle que vous voulez ou indiquez l'heure du déverrouillage. Un verrouillage de plus d'une heure demande d'abord confirmation et précise quand il se termine."
 }

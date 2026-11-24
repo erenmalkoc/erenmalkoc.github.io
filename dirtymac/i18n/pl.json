@@ -79,5 +79,7 @@
  "demo.aria": "Panel dirtymac na pasku menu, interaktywny podgląd",
  "copy.ok": "Skopiowano do schowka",
  "copy.unavailable": "Kopiowanie nie jest dostępne w tej przeglądarce",
- "copy.failed": "Nie udało się skopiować — zaznacz polecenie ręcznie"
+ "copy.failed": "Nie udało się skopiować — zaznacz polecenie ręcznie",
+ "f.timer.title": "Automatyczne odblokowanie do doby",
+ "f.timer.text": "Wybierz czas od 30 sekund do 24 godzin, wpisz dowolny albo wskaż godzinę odblokowania. Blokada dłuższa niż godzina najpierw poprosi o potwierdzenie i poda, kiedy się skończy."
 }

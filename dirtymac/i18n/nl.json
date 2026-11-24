@@ -79,5 +79,7 @@
  "demo.aria": "dirtymac-paneel in de menubalk, interactieve preview",
  "copy.ok": "Gekopieerd naar het klembord",
  "copy.unavailable": "Kopiëren is niet beschikbaar in deze browser",
- "copy.failed": "Kopiëren is mislukt — selecteer de opdracht handmatig"
+ "copy.failed": "Kopiëren is mislukt — selecteer de opdracht handmatig",
+ "f.timer.title": "Automatisch ontgrendelen tot een dag",
+ "f.timer.text": "Kies een duur van 30 seconden tot 24 uur, typ een eigen duur of kies een tijdstip om te ontgrendelen. Een vergrendeling van langer dan een uur vraagt eerst om bevestiging en zegt wanneer die eindigt."
 }

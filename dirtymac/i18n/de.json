@@ -79,5 +79,7 @@
  "demo.aria": "dirtymac-Menüleistenfenster, interaktive Vorschau",
  "copy.ok": "In die Zwischenablage kopiert",
  "copy.unavailable": "Kopieren ist in diesem Browser nicht verfügbar",
- "copy.failed": "Kopieren nicht möglich — wähle den Befehl manuell aus"
+ "copy.failed": "Kopieren nicht möglich — wähle den Befehl manuell aus",
+ "f.timer.title": "Auto-Entsperren bis zu einem Tag",
+ "f.timer.text": "Wähle eine Dauer von 30 Sekunden bis 24 Stunden, gib eine beliebige Dauer ein oder lege eine Uhrzeit zum Entsperren fest. Eine Sperre von mehr als einer Stunde fragt zuerst nach und nennt dir, wann sie endet."
 }

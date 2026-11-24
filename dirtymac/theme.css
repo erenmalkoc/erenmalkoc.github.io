@@ -564,6 +564,8 @@
 .sym--warning { --mask: url("../assets/dirtymac-sym-warning.png"); width: 12.3px; height: 11.1px; }
 .sym--warning-large { --mask: url("../assets/dirtymac-sym-warning-large.png"); width: 44.1px; height: 39.6px; color: var(--ui-orange); }
 .sym--check { --mask: url("../assets/dirtymac-sym-check-circle.png"); width: 13px; height: 13px; }
+.sym--moon { --mask: url("../assets/dirtymac-sym-moon.png"); width: 11px; height: 14px; }
+.sym--bolt { --mask: url("../assets/dirtymac-sym-bolt.png"); width: 10px; height: 14px; }
 .power__glyph { --mask: url("../assets/dirtymac-glyph-power.png"); width: 52.625px; height: 54px; }
 .gear { --mask: url("../assets/dirtymac-glyph-gear.png"); width: 16px; height: 16px; }
 
@@ -768,6 +770,51 @@
   padding: 22px 18px;
 }
 
+.popover__body--long {
+  display: none;
+  gap: 14px;
+}
+
+.popover[data-state="confirmLong"] [data-body-main] {
+  display: none;
+}
+
+.popover[data-state="confirmLong"] .popover__body--long {
+  display: flex;
+}
+
+.long__icon {
+  width: 48px;
+  height: 45px;
+}
+
+.long__warnings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--popover-ink-2);
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.long__warnings li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.long__warnings .sym {
+  flex: none;
+  margin-top: 0;
+}
+
+.long__warnings li[hidden] {
+  display: none;
+}
+
 .popover__body--confirm {
   display: none;
   gap: 14px;
@@ -883,6 +930,76 @@
   color: var(--popover-ink-2);
   font-size: 15px;
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The entry box under the Auto-unlock pop-up ("Custom…"): For a length or Until a time of day
+   (AutoUnlockControl.entryBox). */
+.timerbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.timerbox[hidden],
+.timerbox [hidden] {
+  display: none;
+}
+
+.timerbox--settings {
+  align-items: flex-start;
+}
+
+.seg--small button {
+  height: 20px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.timerbox__fields {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.timerbox__field {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--popover-ink);
+  font-size: 12px;
+}
+
+.timerbox input {
+  height: 20px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 5px;
+  background: var(--popover-control);
+  color: var(--popover-ink);
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color-scheme: inherit;
+}
+
+.timerbox input[type="number"] {
+  width: 46px;
+  text-align: right;
+}
+
+.timerbox input:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 1px;
+}
+
+.timerbox__end {
+  margin: 0;
+  color: var(--popover-ink-2);
+  font-size: 11px;
+  line-height: 14px;
   font-variant-numeric: tabular-nums;
 }
 

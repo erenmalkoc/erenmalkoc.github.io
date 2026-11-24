@@ -40,6 +40,11 @@ KEYS = [
     "Sound", "Play sounds", "Appearance", "System", "Light", "Dark", "Language",
     "Quick Access", "Global shortcut", "Open at login", "Updates", "Check for updates",
     "dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address.",
+    "Custom…", "For", "Until", "Unlocks at %@", "Long Lock",
+    "The keyboard stays locked for %@, until %@, unless you unlock it sooner.",
+    "To unlock sooner, click the menu bar icon or hold Esc for 3 seconds.",
+    "The lock ends early if the Mac goes to sleep or the screen locks.",
+    "The screen stays on the whole time, which uses power.", "Hours", "Minutes",
     "Check now", "Checking…", "dirtymac is up to date.", "Help", "Show Welcome Screen", "What's New",
 ]
 

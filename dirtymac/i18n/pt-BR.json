@@ -79,5 +79,7 @@
  "demo.aria": "Painel da barra de menus do dirtymac, prévia interativa",
  "copy.ok": "Copiado para a área de transferência",
  "copy.unavailable": "A cópia não está disponível neste navegador",
- "copy.failed": "Não foi possível copiar — selecione o comando manualmente"
+ "copy.failed": "Não foi possível copiar — selecione o comando manualmente",
+ "f.timer.title": "Desbloqueio automático de até um dia",
+ "f.timer.text": "Escolha uma duração de 30 segundos a 24 horas, digite a que quiser ou escolha um horário para desbloquear. Um bloqueio de mais de uma hora pede confirmação antes e diz quando termina."
 }

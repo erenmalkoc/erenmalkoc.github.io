@@ -79,5 +79,7 @@
  "demo.aria": "dirtymac menü çubuğu paneli, etkileşimli önizleme",
  "copy.ok": "Panoya kopyalandı",
  "copy.unavailable": "Bu tarayıcıda kopyalama kullanılamıyor",
- "copy.failed": "Kopyalanamadı — komutu elle seçin"
+ "copy.failed": "Kopyalanamadı — komutu elle seçin",
+ "f.timer.title": "Bir güne kadar otomatik açılma",
+ "f.timer.text": "30 saniyeden 24 saate kadar bir süre seçin, istediğiniz süreyi yazın ya da kilidin açılacağı saati belirleyin. Bir saatten uzun süren kilit önce onay ister ve ne zaman biteceğini söyler."
 }

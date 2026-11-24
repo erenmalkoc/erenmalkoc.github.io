@@ -79,5 +79,7 @@
  "demo.aria": "Bảng điều khiển dirtymac trên thanh menu, bản xem trước tương tác",
  "copy.ok": "Đã sao chép vào bảng nhớ tạm",
  "copy.unavailable": "Trình duyệt này không hỗ trợ sao chép",
- "copy.failed": "Không sao chép được — hãy chọn lệnh thủ công"
+ "copy.failed": "Không sao chép được — hãy chọn lệnh thủ công",
+ "f.timer.title": "Tự động mở khóa đến một ngày",
+ "f.timer.text": "Chọn thời lượng từ 30 giây đến 24 giờ, nhập bất kỳ thời lượng nào hoặc chọn giờ trong ngày để mở khóa. Khóa dài hơn một giờ sẽ hỏi xác nhận trước và cho biết khi nào kết thúc."
 }

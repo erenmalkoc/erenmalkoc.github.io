@@ -79,5 +79,7 @@
  "demo.aria": "dirtymac menu bar panel, interactive preview",
  "copy.ok": "Copied to clipboard",
  "copy.unavailable": "Copying isn't available in this browser",
- "copy.failed": "Couldn't copy — select the command manually"
+ "copy.failed": "Couldn't copy — select the command manually",
+ "f.timer.title": "Auto-unlock up to a day",
+ "f.timer.text": "Pick a length from 30 seconds to 24 hours, enter any length, or choose a time of day to unlock at. A lock over an hour asks first, and says when it ends."
 }

@@ -33,7 +33,7 @@
          ligature text. Keep it a separate request, because icon_names subsets
          every family in the same request (Roboto would lose most glyphs). -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back,balance,battery_full,bedtime,checklist,cloud_off,content_copy,download,exit_to_app,keyboard,keyboard_command_key,laptop_mac,lock,login,mouse,search,shield,timer,translate,tune,volume_up,wifi&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back,balance,battery_full,bedtime,checklist,cloud_off,content_copy,download,exit_to_app,keyboard,keyboard_command_key,laptop_mac,lock,login,mouse,schedule,search,shield,timer,translate,tune,volume_up,wifi&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../styles.css" />
@@ -193,6 +193,7 @@
                             <span id="l-auto-panel" data-t="Auto-unlock">Auto-unlock</span>
                             <span class="popup popup--small popup--panel"><select aria-labelledby="l-auto-panel" data-select="autoUnlockSeconds"></select></span>
                           </div>
+                          <div class="timerbox" data-timer-box hidden></div>
                         </div>
                         <div class="status__stack status__wait" data-status-wait>
                           <strong data-wait-text aria-live="polite">Locking in 5…</strong>
@@ -237,10 +238,28 @@
                     </div>
                   </div>
 
+                  <!-- Long lock confirmation (more than an hour, the mouse stays free) -->
+                  <div class="popover__body popover__body--long" data-body-long>
+                    <img class="long__icon" src="../assets/dirtymac-sym-clock-alert.png" alt="" width="48" height="45" />
+                    <div class="confirm__text">
+                      <strong data-t="Long Lock">Long Lock</strong>
+                      <p class="confirm__duration" data-long-text></p>
+                      <p data-t="To unlock sooner, click the menu bar icon or hold Esc for 3 seconds.">To unlock sooner, click the menu bar icon or hold Esc for 3 seconds.</p>
+                    </div>
+                    <ul class="long__warnings">
+                      <li><span class="sym sym--moon" aria-hidden="true"></span><span data-t="The lock ends early if the Mac goes to sleep or the screen locks.">The lock ends early if the Mac goes to sleep or the screen locks.</span></li>
+                      <li data-long-awake><span class="sym sym--bolt" aria-hidden="true"></span><span data-t="The screen stays on the whole time, which uses power.">The screen stays on the whole time, which uses power.</span></li>
+                    </ul>
+                    <div class="confirm__buttons">
+                      <button class="mac-btn mac-btn--regular" type="button" data-long-cancel data-t="Cancel">Cancel</button>
+                      <button class="mac-btn mac-btn--regular mac-btn--prominent" type="button" data-long-lock data-t="Lock Keyboard">Lock Keyboard</button>
+                    </div>
+                  </div>
+
                   <hr class="popover__rule" />
                   <div class="popover__footer">
                     <button class="mac-btn mac-btn--icon" type="button" data-open-settings aria-label="Settings"><span class="gear" aria-hidden="true"></span></button>
-                    <span class="popover__version">v1.4.5</span>
+                    <span class="popover__version">v1.4.6</span>
                     <button class="mac-btn" type="button" data-quit data-t="Quit">Quit</button>
                   </div>
                 </section>
@@ -262,11 +281,13 @@
                           <button type="button" role="radio" data-value="advanced" data-t="Advanced">Advanced</button>
                         </div>
                         <div class="row row--between" data-basic-timer><span id="l-auto-basic" data-t="Auto-unlock">Auto-unlock</span><span class="popup popup--small"><select aria-labelledby="l-auto-basic" data-select="autoUnlockSeconds"></select></span></div>
+                        <div class="timerbox timerbox--settings" data-timer-box hidden></div>
                         <div class="advanced" data-advanced hidden>
                           <div class="row"><span id="l-mod" data-t="Block modifier keys">Block modifier keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-mod" data-switch="blockModifierKeys"></button></div>
                           <div class="row"><span id="l-media" data-t="Block media & brightness keys">Block media &amp; brightness keys</span><button class="switch" type="button" role="switch" aria-labelledby="l-media" data-switch="blockMediaKeys"></button></div>
                           <div class="row"><span id="l-mouse" data-t="Block mouse & trackpad">Block mouse &amp; trackpad</span><button class="switch" type="button" role="switch" aria-labelledby="l-mouse" data-switch="blockMouseAndTrackpad"></button></div>
                           <div class="row row--between"><span id="l-auto" data-t="Auto-unlock">Auto-unlock</span><span class="popup popup--small"><select aria-labelledby="l-auto" data-select="autoUnlockSeconds"></select></span></div>
+                          <div class="timerbox timerbox--settings" data-timer-box hidden></div>
                           <p class="note note--warning" data-frozen-warning hidden><span class="sym sym--warning" aria-hidden="true"></span><span data-t="Mouse will be frozen. Hold Esc for 3s to force unlock.">Mouse will be frozen. Hold Esc for 3s to force unlock.</span></p>
                           <p class="note" data-frozen-note hidden></p>
                         </div>
@@ -327,7 +348,7 @@
                         <h3 data-t="Help">Help</h3>
                         <div class="row row--buttons">
                           <a class="mac-btn" href="#install" data-t="Show Welcome Screen">Show Welcome Screen</a>
-                          <a class="mac-btn" href="https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.5" rel="noopener" data-t="What's New">What's New</a>
+                          <a class="mac-btn" href="https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.6" rel="noopener" data-t="What's New">What's New</a>
                         </div>
                       </div>
 
@@ -335,7 +356,7 @@
                   </div>
                   <hr class="popover__rule" />
                   <div class="popover__footer">
-                    <span class="popover__version">v1.4.5</span>
+                    <span class="popover__version">v1.4.6</span>
                   </div>
                 </section>
 
@@ -437,6 +458,13 @@
                 Optionally freeze the mouse, trackpad and gestures too, pick which key classes to
                 block, and set an auto-unlock timer.
               </p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+            <div>
+              <h3 data-i18n="f.timer.title">Auto-unlock up to a day</h3>
+              <p data-i18n="f.timer.text">Pick a length from 30 seconds to 24 hours, enter any length, or choose a time of day to unlock at. A lock over an hour asks first, and says when it ends.</p>
             </div>
           </li>
           <li class="feature">
