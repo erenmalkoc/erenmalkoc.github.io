@@ -50,13 +50,17 @@
     startDelaySeconds: 0,
     playSounds: true,
     appearance: "system",
-    language: "system",
+    // English first, like the page: the demo does not follow the browser unless "System" is
+    // picked in Settings. Every one of the app's 17 languages stays on offer there.
+    language: "en",
     hotKey: "ctrlOptCmdK",
     openAtLogin: false,
     updateChecks: false
   };
 
-  var STORAGE_KEY = "dirtymac-demo-settings";
+  // -v2: the first version stored "System" as the language, which made the demo open in the
+  // visitor's browser language. Starting over puts everyone on English.
+  var STORAGE_KEY = "dirtymac-demo-settings-v2";
   var cfg = load();
 
   function load() {
